@@ -1,0 +1,8 @@
+ul#providers {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.provider dd {
+  padding-bottom: 10px;
+}
