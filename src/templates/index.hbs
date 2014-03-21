@@ -1,0 +1,90 @@
+---
+title: Affirmations
+---
+
+<form role="form">
+  <div class="form-group">
+    <label for="type">Provider type</label>
+    <select id="type" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="county">County</label>
+    <select id="county" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="orientation">Sexual/attractional orientation of provider</label>
+    <select id="orientation" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="sex_gender_identity">Sex/gender identity of provider</label>
+    <select id="sex_gender_identity" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="race">Race/ethnicity identity of provider</label>
+    <select id="race" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="languages">Languages spoken</label>
+    <select id="languages" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="specialties">Other specialties and sensitivities</label>
+    <select id="specialties" class="form-control">
+      <option></option>
+    </select>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="near_bus" id="near_bus">
+      Near a bus line
+    </label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="low_income" id="low_income">
+      Offers low-income accommodations
+    </label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="low_income" id="low_income">
+      Offers low-income accommodations
+    </label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="completed_cultural_competency_training" id="completed_cultural_competency_training">
+      Has completed Affirmations' cultural competency training(s) for health providers
+    </label>
+  </div>
+</form>
+
+<ul id="providers">
+  {{#each providers}}
+  <li id="provider-{{rowNumber}}" class="provider">
+  {{> provider}}
+  </li>
+  {{/each}}
+</ul>

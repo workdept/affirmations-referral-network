@@ -1,0 +1,71 @@
+<h3>{{providername}}</h3>
+
+<dl>
+  <dt>Agency name</dt>
+  <dd>{{agencyname}}
+ 
+  <dt>Type</dt>
+  <dd>{{type}}</dd>
+
+  <dt>Sexual/attractional orientation of provider</dt>
+  <dd>{{orientation}}</dd>
+
+  <dt>Sex/gender identity of provider</dt>
+  <dd>{{sexgenderidentity}}</dd>
+
+  <dt>Race/ethnicity identity of provider</dt>
+  <dd>{{race}}</dd>
+
+  <dt>Languages spoken</dt>
+  <dd>{{languages}}</dd>
+
+  <dt>County</dt>
+  <dd>{{county}}</dd>
+
+  <dt>Address</dt>
+  <dd>
+    {{streetaddress}}<br />
+    {{city}}, {{state}} {{zip}}
+  </dd>
+
+  <dt>Office hours</dt>
+  <dd>{{officehours}}</dd>
+
+  {{#if nearbus}}
+  <dt>Nearby bus lines</dt>
+  <dd>{{nearbybuslines}}</dd>
+  {{/if}}
+
+  <dt>Phone</dt>
+  <dd>{{phone}}</dd>
+
+  <dt>Website</dt>
+  <dd><a href="{{website}}">{{website}}</a></dd>
+
+  <dt>Insurances accepted</dt>
+  <dd>{{insurancesaccepted}}</dd>
+
+  <dt>Offers low-income accommodations?</dt>
+  <dd>{{#if lowincome}}Yes{{else}}No{{/if}}</dd>
+
+  <dt>Other Specialties and Sensitivities</dt>
+  <dd>{{specialties}}</dd>
+
+  {{#if trainings}}
+  <dt>Relevant trainings</dt>
+  <dd>{{trainings}}</dd>
+  {{/if}}
+
+  <dt>Has completed Affirmations' cultural competency training(s) for health providers?</dt>
+  <dd>{{#if completedculturalcompetencytraining}}Yes{{else}}No{{/if}}</dd>
+  
+  {{#if affirmationstrainings}} 
+  <dt>Affirmations training completed</dt>
+  <dd>{{affirmationstrainings}}</dd>
+  {{/if}}
+
+  {{#if comments}}  
+  <dt>Additional comments</dt>
+  <dd>{{comments}}</dd>
+  {{/if}}
+</dl>

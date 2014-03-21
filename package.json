@@ -1,0 +1,25 @@
+{
+  "name": "affirmations-referral-network",
+  "version": "0.0.0",
+  "description": "Healthcare directory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "healthcare",
+    "directory"
+  ],
+  "author": "Geoff Hing <geoffhing@gmail.com>",
+  "license": "BSD",
+  "devDependencies": {
+    "assemble": "^0.4.37",
+    "grunt": "^0.4.4",
+    "grunt-newer": "^0.7.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0",
+    "google-spreadsheet": "^0.2.8",
+    "grunt-contrib-watch": "^0.6.1",
+    "tabletop": "git://github.com/ghing/tabletop.git#45-no_empty_query"
+  }
+}
