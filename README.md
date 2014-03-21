@@ -20,6 +20,8 @@ The list of healthcare providers is stored in a Google spreadsheet, but we bake 
 grunt bakeproviders
 ```
 
+This will update the data file in ``src/data/providers.json``.
+
 ## Building the site
 
 ```
@@ -52,3 +54,18 @@ http-server
 
 If you visit http://localhost:8080 in your browser, you'll see the generated site.
 
+## Editing content
+
+For the most part you'll only want to edit the Markdown files in the ``src/content`` directory and not touch template or data files.
+
+You can clone the respository, or use [Prose.io](http://prose.io/) to make edits.
+
+### Introduction
+
+This is the text that appears below the title on the home page.
+
+File: ``src/content/introduction.md`` 
+
+### About page
+
+File: ``src/content/about.md``
