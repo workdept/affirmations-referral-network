@@ -1,5 +1,12 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    clean: {
+      project: [
+        '*.html',
+        'css'
+      ]
+    },
+
     assemble: {
       options: {
         flatten: true,
@@ -54,6 +61,7 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadTasks('./tasks');
