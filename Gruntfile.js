@@ -10,15 +10,12 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         flatten: true,
-        assets: 'assets',
+        assets: '',
         data:   'src/data/*.json',
 
         layoutdir: 'src/templates/layouts',
         layout: 'default.hbs',
-        partials: 'src/templates/partials/*.hbs',
-
-        // Custom variables
-        baseUrl: ''
+        partials: 'src/templates/partials/*.hbs'
       },
       project: {
         files: {
