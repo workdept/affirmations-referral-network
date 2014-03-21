@@ -3,6 +3,10 @@ ul#providers {
   padding-left: 0;
 }
 
+.provider {
+  border-bottom: solid 1px #eee;
+}
+
 .provider dd {
   padding-bottom: 10px;
 }
