@@ -1,6 +1,6 @@
 var fs = require('fs');
 var should = require('should');
-var Affirmations = require('../src/assets/js/models.js');
+var Affirmations = require('../src/assets/js/affirmations.js');
 var dataFile = __dirname + '/../src/data/providers.json';
 
 describe('Providers', function() {
