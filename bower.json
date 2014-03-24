@@ -1,0 +1,29 @@
+{
+  "name": "affirmations-referral-network",
+  "version": "0.0.0",
+  "homepage": "https://github.com/workdept/affirmations-referral-network",
+  "authors": [
+    "Geoff Hing <geoffhing@gmail.com>"
+  ],
+  "description": "Healthcare directory",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "healthcare",
+    "search"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "backbone": "~1.1.2",
+    "bootstrap": "~3.1.1"
+  }
+}
