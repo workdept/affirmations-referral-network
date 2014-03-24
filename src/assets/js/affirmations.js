@@ -10,10 +10,15 @@
     root.Affirmations = factory(root, root.Affirmations || {}, root._, root.Backbone);
   }
 }(this, function(root, Affirmations, _, Backbone) {
+  // Models
+
   var Provider = Backbone.Model.extend({
     idAttribute: 'rowNumber' 
   });
 
+
+  // Collections
+  
   var Providers = Affirmations.Providers = Backbone.Collection.extend({
     model: Provider,
 
@@ -39,6 +44,19 @@
         }
       });
       return opts;
+    }
+  });
+
+
+  // Views
+  
+  var SelectFilterView = Affirmations.SelectFilterView = Backbone.View.extend({
+    render: function() {
+      this.$('option').remove();
+      var attrName = this.$el.attr('id');
+      _.each(this.collection.attrOptions(attrName), function(opt) {
+        var $el = $('<option>').attr('value', opt).html(opt).appendTo(this.$el);
+      }, this);
     }
   });
 

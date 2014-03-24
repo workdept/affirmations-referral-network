@@ -35,6 +35,17 @@ module.exports = function(grunt) {
             dest: __dirname 
           }
         ]
+      },
+
+      data: {
+        files: [
+          {
+            expand: true,
+            cwd: 'src/data/',
+            src: ['**'], 
+            dest: __dirname + '/data/'
+          }
+        ]
       }
     },
 
