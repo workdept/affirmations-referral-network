@@ -1,3 +1,7 @@
+#main {
+  padding-top: 50px;
+}
+
 .navbar-header {
   float: left;
 }
@@ -47,10 +51,15 @@
   left: 90%;
 }
 
+.offcanvas-show .navbar-fixed-top {
+  left: 90%;
+}
+
 #offcanvas-sidebar {
   position: absolute;
   top: 0;
   width: 90%;
+  height: 100%;
   left: -90%;
   padding: 15px;
 
