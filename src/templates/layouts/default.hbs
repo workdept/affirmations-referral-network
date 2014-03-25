@@ -20,37 +20,45 @@
     <link rel="stylesheet" href="{{assets}}/css/affirmations.css">
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Affirmations</a>
+    <div id="offcanvas-outer-wrap">
+      <div id="offcanvas-inner-wrap">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              {{#if show_toggle}}
+              <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              {{/if}}
+              <a class="navbar-brand" href="index.html">Affirmations</a>
+            </div>
+
+            <ul class="nav navbar-nav">
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+
+          </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="container">
+          {{#if title }}<h1>{{title}}</h1>{{/if}} 
+          {{> body }}
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-
-    <div class="container">
-      {{#if title }}<h1>{{title}}</h1>{{/if}} 
-      {{> body }}
+      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    {{#each footer_scripts }} 
+    <script src="{{this}}"></script>
+    {{/each}}
   </body>
 </html>

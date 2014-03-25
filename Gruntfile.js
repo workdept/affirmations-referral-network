@@ -3,7 +3,9 @@ module.exports = function(grunt) {
     clean: {
       project: [
         '*.html',
-        'css'
+        'css',
+        'js',
+        'data'
       ]
     },
 
@@ -35,6 +37,17 @@ module.exports = function(grunt) {
             dest: __dirname 
           }
         ]
+      },
+
+      data: {
+        files: [
+          {
+            expand: true,
+            cwd: 'src/data/',
+            src: ['**'], 
+            dest: __dirname + '/data/'
+          }
+        ]
       }
     },
 
@@ -44,9 +57,11 @@ module.exports = function(grunt) {
         'src/templates/layouts/*.hbs',
         'src/templates/partials/*.hbs',
         'src/content/*.md', 
-        'src/data/*'
+        'src/data/*',
+        'src/assets/css/*',
+        'src/assets/js/*'
       ],
-      tasks: ['newer:assemble']
+      tasks: ['newer:assemble', 'copy']
     },
 
     bakeproviders: {
