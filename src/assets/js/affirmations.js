@@ -173,7 +173,9 @@
       this.$('option').remove();
       $('<label>').attr('for', this.filterAttribute).html(this.label)
         .appendTo(this.$el);
-      $('<select>').attr('id', this.filterAttribute).addClass('form-control')
+      $('<select>').attr('id', this.filterAttribute)
+        .attr('multiple', 'multiple')
+        .addClass('form-control')
         .appendTo(this.$el);
       this.renderSelect();
       return this;
@@ -184,7 +186,7 @@
       var placeholder = this.placeholder || "Select an option";
 
       $select.find('option').remove();
-      $select.append('<option value="" disabled selected>' + placeholder + '</option>');
+      //$select.append('<option value="" disabled selected>' + placeholder + '</option>');
       _.each(this.collection.attrOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt).appendTo($select);
       }, this);
