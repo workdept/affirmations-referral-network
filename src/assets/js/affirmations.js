@@ -161,7 +161,9 @@
     initialize: function(options) {
       this._childViews = [];
       _.each(this.options.filters, function(filterOpts) {
-        this._childViews.push(this._createChildView(filterOpts));
+        var view = this._createChildView(filterOpts);
+        this.listenTo(view, 'change', this.handleChange, this);
+        this._childViews.push(view);
       }, this);
 
       this.collection.on('sync', this.render, this);
@@ -188,6 +190,12 @@
         this.$el.append(view.render().$el);
       }, this);
       return this;
+    },
+
+    handleChange: function(attr, val) {
+      var facets = {};
+      facets[attr] = val;
+      this.collection.facet(facets);
     }
   });
 
@@ -233,8 +241,8 @@
     },
 
     change: function(evt) {
-      console.debug('change');
-      console.debug(this.$('select').val());
+      var val = this.$('select').val();
+      this.trigger('change', this.filterAttribute, val);
     }
   });
 
@@ -258,8 +266,30 @@
     },
 
     change: function(evt) {
-      console.debug('change');
-      console.debug(this.$('input').prop('checked'));
+      var val = this.$('input').prop('checked');
+      this.trigger('change', this.filterAttribute, val); 
+    }
+  });
+
+  var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
+    initialize: function(options) {
+      this.collection.on('facet', this.handleFacet, this);
+    },
+
+    handleFacet: function(providers) {
+      var map = {};
+      _.each(providers, function(provider) {
+        map[provider.id] = true;
+      });
+      this.$providers().each(function() {
+        var $el = $(this);
+        var id = $el.data('id');
+        $el.toggle(map[id] || false);
+      });
+    },
+
+    $providers: function() {
+      return this.$('.provider');
     }
   });
 
