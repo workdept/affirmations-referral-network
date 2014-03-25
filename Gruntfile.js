@@ -3,7 +3,9 @@ module.exports = function(grunt) {
     clean: {
       project: [
         '*.html',
-        'css'
+        'css',
+        'js',
+        'data'
       ]
     },
 
