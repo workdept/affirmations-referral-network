@@ -57,9 +57,11 @@ module.exports = function(grunt) {
         'src/templates/layouts/*.hbs',
         'src/templates/partials/*.hbs',
         'src/content/*.md', 
-        'src/data/*'
+        'src/data/*',
+        'src/assets/css/*',
+        'src/assets/js/*'
       ],
-      tasks: ['newer:assemble']
+      tasks: ['newer:assemble', 'copy']
     },
 
     bakeproviders: {
