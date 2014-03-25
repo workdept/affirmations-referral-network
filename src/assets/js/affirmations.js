@@ -19,20 +19,23 @@
       var attr;
       var val;
       var intersect;
+      var thisVal;
 
-      // @bookmark
-      // @todo: Move this check to Provider model
       for (attr in attrs) {
         val = attrs[attr];
+        thisVal = this.get(attr);
 
         if (_.isArray(val)) {
-          intersect = _.intersection(val, this.get(attr));
+          if (!_.isArray(thisVal)) {
+            thisVal = [thisVal];
+          }
+          intersect = _.intersection(val, thisVal);
           if (intersect.length === 0) {
             return false;
           }
         }
         else {
-          if (val !== this.get(attr)) {
+          if (val !== thisVal) {
             return false;
           }
         }
