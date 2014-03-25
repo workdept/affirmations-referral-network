@@ -19,6 +19,7 @@ module.exports = function(grunt) {
           d.completedculturalcompetencytraining = d.completedculturalcompetencytraining.toLowerCase() === 'true' ? true : false; 
           d.type = d.type.split(multiValueDelimiter);
           d.specialties = d.specialties.split(multiValueDelimiter);
+          d.languages = d.languages.split(multiValueDelimiter);
         }
         fs.writeFile(outputFile, JSON.stringify(data), function(err) {
           if (err) {
