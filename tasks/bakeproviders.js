@@ -1,7 +1,14 @@
-var Tabletop = require('tabletop');
 var fs = require('fs');
+var Tabletop = require('tabletop');
 
 module.exports = function(grunt) {
+  var multiValueDelimiter = /;\s*/; 
+
+  function splitValues(val) {
+    return val.split(multiValueDelimiter).filter(function(s) {
+      return s !== "";
+    });
+  }
 
   grunt.registerMultiTask('bakeproviders', 'Bake provider list to JSON', function() {
     var done = this.async();
@@ -11,15 +18,14 @@ module.exports = function(grunt) {
       key: spreadsheetId,
       callback: function(data, tabletop) {
         var d;
-        var multiValueDelimiter = /;\s*/; 
         for (var i = 0; i < data.length; i++) {
           d = data[i];
           d.nearbus = d.nearbus.toLowerCase() === 'true' ? true : false;
           d.lowincome = d.lowincome.toLowerCase() === 'true' ? true : false;
           d.completedculturalcompetencytraining = d.completedculturalcompetencytraining.toLowerCase() === 'true' ? true : false; 
-          d.type = d.type.split(multiValueDelimiter);
-          d.specialties = d.specialties.split(multiValueDelimiter);
-          d.languages = d.languages.split(multiValueDelimiter);
+          d.type = splitValues(d.type);
+          d.specialties = splitValues(d.specialties);
+          d.languages = splitValues(d.languages);
         }
         fs.writeFile(outputFile, JSON.stringify(data), function(err) {
           if (err) {
