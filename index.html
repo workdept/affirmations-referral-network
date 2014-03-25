@@ -20,114 +20,118 @@
     <link rel="stylesheet" href="./css/affirmations.css">
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Affirmations</a>
-        </div>
+    <div id="offcanvas-outer-wrap">
+      <div id="offcanvas-inner-wrap">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+          <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              
+              <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle menu</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="index.html">Affirmations</a>
+            </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+            <ul class="nav navbar-nav">
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
 
-    <div class="container">
-      <h1>Affirmations</h1> 
-      
+          </div><!-- /.container-fluid -->
+        </nav>
 
-<p>TODO: Add introduction text.</p>
+        <div class="container">
+          <h1>Affirmations</h1> 
+          
+
+<p>A Google-spreadsheet backed directory of healthcare providers. These are introduction sentences for the project.</p>
 
 
-<form role="form">
-  <div class="form-group">
-    <label for="type">Provider type</label>
-    <select id="type" class="form-control">
-      <option></option>
-    </select>
-  </div>
+<div id="offcanvas-sidebar">
+  <form role="form" id="filters">
+    <div class="form-group">
+      <label for="type">Provider type</label>
+      <select id="type" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="county">County</label>
-    <select id="county" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="county">County</label>
+      <select id="county" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="orientation">Sexual/attractional orientation of provider</label>
-    <select id="orientation" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="orientation">Sexual/attractional orientation of provider</label>
+      <select id="orientation" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="sex_gender_identity">Sex/gender identity of provider</label>
-    <select id="sex_gender_identity" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="sex_gender_identity">Sex/gender identity of provider</label>
+      <select id="sex_gender_identity" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="race">Race/ethnicity identity of provider</label>
-    <select id="race" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="race">Race/ethnicity identity of provider</label>
+      <select id="race" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="languages">Languages spoken</label>
-    <select id="languages" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="languages">Languages spoken</label>
+      <select id="languages" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="form-group">
-    <label for="specialties">Other specialties and sensitivities</label>
-    <select id="specialties" class="form-control">
-      <option></option>
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="specialties">Other specialties and sensitivities</label>
+      <select id="specialties" class="form-control">
+        <option></option>
+      </select>
+    </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="near_bus" id="near_bus">
-      Near a bus line
-    </label>
-  </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="near_bus" id="near_bus">
+        Near a bus line
+      </label>
+    </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="low_income" id="low_income">
-      Offers low-income accommodations
-    </label>
-  </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="low_income" id="low_income">
+        Offers low-income accommodations
+      </label>
+    </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="low_income" id="low_income">
-      Offers low-income accommodations
-    </label>
-  </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="low_income" id="low_income">
+        Offers low-income accommodations
+      </label>
+    </div>
 
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="completed_cultural_competency_training" id="completed_cultural_competency_training">
-      Has completed Affirmations' cultural competency training(s) for health providers
-    </label>
-  </div>
-</form>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="completed_cultural_competency_training" id="completed_cultural_competency_training">
+        Has completed Affirmations' cultural competency training(s) for health providers
+      </label>
+    </div>
+  </form>
+</div>
 
 <h2>Providers</h2>
 
@@ -275,11 +279,23 @@ Yet Another Long Training, March 2012</dd>
   
 </ul>
 
+        </div>
+      </div>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+     
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+     
+    <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+     
+    <script src="js/affirmations.js"></script>
+     
+    <script src="js/app.js"></script>
+    
   </body>
 </html>
