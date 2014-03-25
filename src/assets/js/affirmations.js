@@ -38,11 +38,22 @@
       var seen = {};
       this.each(function(provider) {
         var val = provider.get(attr);
-        if (!seen[val]) {
-          seen[val] = true;
-          opts.push(val);
+        var vals;
+        if (_.isArray(val)) {
+          vals = val;
         }
-      });
+        else {
+          vals = [val];
+        }
+
+        _.each(vals, function(val) {
+          if (!seen[val]) {
+            seen[val] = true;
+            opts.push(val);
+          }
+        });
+      }, this);
+
       return opts;
     }
   });

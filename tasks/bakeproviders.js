@@ -16,6 +16,7 @@ module.exports = function(grunt) {
           d.nearbus = d.nearbus.toLowerCase() === 'true' ? true : false;
           d.lowincome = d.lowincome.toLowerCase() === 'true' ? true : false;
           d.completedculturalcompetencytraining = d.completedculturalcompetencytraining.toLowerCase() === 'true' ? true : false; 
+          d.type = d.type.split(/;\s*/);
         }
         fs.writeFile(outputFile, JSON.stringify(data), function(err) {
           if (err) {
