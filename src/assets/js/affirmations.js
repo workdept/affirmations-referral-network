@@ -12,8 +12,34 @@
 }(this, function(root, Affirmations, _, Backbone) {
   // Models
 
-  var Provider = Backbone.Model.extend({
-    idAttribute: 'id' 
+  var Provider = Affirmations.Provider = Backbone.Model.extend({
+    idAttribute: 'id',
+
+    matchesFacets: function(attrs) {
+      var attr;
+      var val;
+      var intersect;
+
+      // @bookmark
+      // @todo: Move this check to Provider model
+      for (attr in attrs) {
+        val = attrs[attr];
+
+        if (_.isArray(val)) {
+          intersect = _.intersection(val, this.get(attr));
+          if (intersect.length === 0) {
+            return false;
+          }
+        }
+        else {
+          if (val !== this.get(attr)) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
   });
 
 
@@ -24,17 +50,17 @@
 
     url: '/data/providers.json',
 
-    attrOptions: function(attr) {
-      this._attrOptions = this._attrOptions || {};
+    facetOptions: function(attr) {
+      this._facetOptions = this._facetOptions || {};
 
-      if (this._attrOptions[attr]) {
-        return this._attrOptions[attr];
+      if (this._facetOptions[attr]) {
+        return this._facetOptions[attr];
       }
       else {
-        this._attrOptions[attr] = []; 
+        this._facetOptions[attr] = []; 
       }
 
-      var opts = this._attrOptions[attr];
+      var opts = this._facetOptions[attr];
       var seen = {};
       this.each(function(provider) {
         var val = provider.get(attr);
@@ -55,6 +81,14 @@
       }, this);
 
       return opts;
+    },
+
+    facet: function(attrs) {
+      this._faceted = this.filter(function(provider) {
+        return provider.matchesFacets(attrs);
+      }, this);
+      this.trigger('facet', this._faceted);
+      return this._faceted;
     }
   });
 
@@ -191,7 +225,7 @@
 
       $select.find('option').remove();
       //$select.append('<option value="" disabled selected>' + placeholder + '</option>');
-      _.each(this.collection.attrOptions(this.filterAttribute), function(opt) {
+      _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt).appendTo($select);
       }, this);
       
