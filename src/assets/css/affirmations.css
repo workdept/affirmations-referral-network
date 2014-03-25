@@ -63,9 +63,57 @@ ul#providers {
 }
 
 .provider {
-  border-bottom: solid 1px #eee;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.provider h3 {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 .provider dd {
   padding-bottom: 10px;
 }
+
+.provider-attrs.primary {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .provider-attrs {
+    overflow: hidden;
+    min-height: 1px;
+    position: relative;
+    width: 50%;
+    float: left;
+  }
+
+  .provider-attrs.secondary {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .provider-attrs.secondary dt,
+  .provider-attrs.secondary dd {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+
+  .provider-attrs.secondary dt {
+    width: 50%;
+    float: left;
+    padding-bottom: 10px;
+    clear: left;
+  }
+
+  .provider-attrs.secondary dd {
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+} 
