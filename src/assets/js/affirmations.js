@@ -169,6 +169,10 @@
       class: 'form-group'
     },
 
+    events: {
+      'change select': 'change'
+    },
+
     render: function() {
       this.$('option').remove();
       $('<label>').attr('for', this.filterAttribute).html(this.label)
@@ -192,12 +196,21 @@
       }, this);
       
       return this;
+    },
+
+    change: function(evt) {
+      console.debug('change');
+      console.debug(this.$('select').val());
     }
   });
 
   var CheckboxFilterView = FilterView.extend({
     attributes: {
       class: 'checkbox'
+    },
+
+    events: {
+      'change input': 'change'
     },
 
     render: function() {
@@ -208,6 +221,11 @@
         .prependTo($label);
       this.$el.append($label);
       return this;
+    },
+
+    change: function(evt) {
+      console.debug('change');
+      console.debug(this.$('input').prop('checked'));
     }
   });
 
