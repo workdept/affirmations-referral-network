@@ -11,11 +11,15 @@ module.exports = function(grunt) {
       key: spreadsheetId,
       callback: function(data, tabletop) {
         var d;
+        var multiValueDelimiter = /;\s*/; 
         for (var i = 0; i < data.length; i++) {
           d = data[i];
           d.nearbus = d.nearbus.toLowerCase() === 'true' ? true : false;
           d.lowincome = d.lowincome.toLowerCase() === 'true' ? true : false;
           d.completedculturalcompetencytraining = d.completedculturalcompetencytraining.toLowerCase() === 'true' ? true : false; 
+          d.type = d.type.split(multiValueDelimiter);
+          d.specialties = d.specialties.split(multiValueDelimiter);
+          d.languages = d.languages.split(multiValueDelimiter);
         }
         fs.writeFile(outputFile, JSON.stringify(data), function(err) {
           if (err) {

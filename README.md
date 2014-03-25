@@ -69,3 +69,9 @@ File: ``src/content/introduction.md``
 ### About page
 
 File: ``src/content/about.md``
+
+## Data formatting
+
+### Multifields
+
+Some fields in the spreadsheet, such as ``type`` can have multiple values.  The multiple values should be separated by a ``;`` (semicolon) character.
