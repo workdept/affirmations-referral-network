@@ -13,7 +13,7 @@
   // Models
 
   var Provider = Backbone.Model.extend({
-    idAttribute: 'rowNumber' 
+    idAttribute: 'id' 
   });
 
 
