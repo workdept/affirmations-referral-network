@@ -3,11 +3,12 @@
     // Node.js or CommonJS
     var _ = require('underscore');
     var Backbone = require('backbone');
-    factory(root, exports, _, Backbone);
+    var lunr = require('lunr');
+    factory(root, exports, _, Backbone, lunr);
   }
   else {
     // Browser globale
-    root.Affirmations = factory(root, root.Affirmations || {}, root._, root.Backbone);
+    root.Affirmations = factory(root, root.Affirmations || {}, root._, root.Backbone, root.lunr);
   }
 }(this, function(root, Affirmations, _, Backbone) {
   // Models
@@ -53,6 +54,34 @@
 
     url: '/data/providers.json',
 
+    initialize: function(models, options) {
+      this.index = lunr(function() {
+        this.field('providername', { boost: 10 });
+        this.ref('id');
+      });
+      this.on('sync', this.updateIndex, this);
+      this.on('reset', this.updateIndex, this);
+      this.on('sync', this.updateFiltered, this);
+      this.on('reset', this.updateFiltered, this);
+    },
+
+    updateIndex: function() {
+      this.each(function(provider) {
+        this.index.add(provider.attributes);
+      }, this);
+      this.trigger('indexed');
+    },
+
+    updateFiltered: function(models) {
+      models = models || this.models;
+      if (models == this) {
+        models = this.models;
+      }
+      this._filtered = models;
+      this._facetOptions = {};
+      this.trigger('filter', this._filtered);
+    },
+
     facetOptions: function(attr) {
       this._facetOptions = this._facetOptions || {};
 
@@ -65,7 +94,8 @@
 
       var opts = this._facetOptions[attr];
       var seen = {};
-      this.each(function(provider) {
+      var providers = this._filtered || this.models;
+      _.each(providers, function(provider) {
         var val = provider.get(attr);
         var vals;
 
@@ -92,11 +122,23 @@
     },
 
     facet: function(attrs) {
-      this._faceted = this.filter(function(provider) {
+      this.updateFiltered(this.filter(function(provider) {
         return provider.matchesFacets(attrs);
-      }, this);
-      this.trigger('facet', this._faceted);
-      return this._faceted;
+      }, this));
+      this.trigger('facet', this._filtered);
+      return this._filtered;
+    },
+
+    resetFilters: function() {
+      this.updateFiltered();
+    },
+
+    search: function(value) {
+      this.updateFiltered(_.map(this.index.search(value), function(match) {
+        return this.get(match.ref);
+      }, this));
+      this.trigger('search', this._filtered);
+      return this._filtered; 
     }
   });
 
@@ -216,7 +258,10 @@
     initialize: function(options) {
       this.filterAttribute = options.filterAttribute;
       this.label = options.label;
-    }
+      this.postInitialize();
+    },
+
+    postInitialize: function() {}
   });
   
   var SelectFilterView = FilterView.extend({
@@ -226,6 +271,11 @@
 
     events: {
       'change select': 'change'
+    },
+
+    postInitialize: function() {
+      this._selected = {};
+      this.collection.on('filter', this.renderSelect, this);
     },
 
     render: function() {
@@ -242,12 +292,12 @@
 
     renderSelect: function() {
       var $select = this.$('select');
-      var placeholder = this.placeholder || "Select an option";
 
       $select.find('option').remove();
-      //$select.append('<option value="" disabled selected>' + placeholder + '</option>');
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
-        var $el = $('<option>').attr('value', opt).html(opt).appendTo($select);
+        var $el = $('<option>').attr('value', opt).html(opt)
+          .prop('selected', this._selected[opt] === true)
+          .appendTo($select);
       }, this);
       
       return this;
@@ -255,6 +305,12 @@
 
     change: function(evt) {
       var val = this.$('select').val();
+      this._selected = {};
+      if (_.isArray(val)) {
+        _.each(val, function(selected) {
+          this._selected[selected] = true;
+        }, this);
+      }
       this.trigger('change', this.filterAttribute, val);
     }
   });
@@ -286,10 +342,10 @@
 
   var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
     initialize: function(options) {
-      this.collection.on('facet', this.handleFacet, this);
+      this.collection.on('filter', this.handleFilter, this);
     },
 
-    handleFacet: function(providers) {
+    handleFilter: function(providers) {
       var map = {};
       _.each(providers, function(provider) {
         map[provider.id] = true;
@@ -303,6 +359,69 @@
 
     $providers: function() {
       return this.$('.provider');
+    }
+  });
+
+  var ProviderCountView = Affirmations.ProviderCountView = Backbone.View.extend({
+    tagName: 'button',
+
+    attributes: {
+      id: 'count'
+    },
+
+    initialize: function(options) {
+      this.collection.on('filter', this.updateFilteredLength, this);
+      this.collection.once('sync', this.updateLength, this);
+      this.length = this.collection.length;
+    },
+
+    render: function() {
+      var label = this.length === 1 ? 'Provider' : 'Providers';
+      this.$el.html(this.length + ' ' + label + ' &#0187;');
+      return this;
+    },
+
+    updateFilteredLength: function(providers) {
+      this.length = providers.length;
+      this.render();
+    },
+
+    updateLength: function() {
+      this.length = this.collection.length;
+      this.render();
+    }
+  });
+
+  var SearchView = Affirmations.SearchView = Backbone.View.extend({
+    options: {
+      minLength: 3
+    },
+
+    attributes: {
+      class: 'form-group'
+    },
+
+    events: {
+      'keyup input': 'change'
+    },
+
+    render: function() {
+      $('<input>').attr('type', 'search').addClass('form-control')
+        .attr('id', 'search')
+        .attr('placeholder', "Search")
+        .appendTo(this.$el);
+      this.delegateEvents();
+      return this;
+    },
+
+    change: function(evt) {
+      var val = this.$('input').val();
+      if (val === '') {
+        this.collection.resetFilters();
+      }
+      else if (val.length >= this.options.minLength) {
+        this.collection.search(val);
+      }
     }
   });
 
