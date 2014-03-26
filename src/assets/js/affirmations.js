@@ -68,6 +68,11 @@
       this.each(function(provider) {
         var val = provider.get(attr);
         var vals;
+
+        if (val === '') {
+          return;
+        }
+
         if (_.isArray(val)) {
           vals = val;
         }
