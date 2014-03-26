@@ -16,7 +16,11 @@
   var countView = new Affirmations.ProviderCountView({
     collection: providers
   });
+  var searchView = new Affirmations.SearchView({
+    collection: providers
+  });
   $('#offcanvas-sidebar').append(countView.$el);
+  $('#offcanvas-sidebar').append(searchView.render().$el);
   $('#offcanvas-sidebar').append(filtersView.$el);
   countView.$el.click(toggleOffcanvas);
   providers.url = 'data/providers.json';

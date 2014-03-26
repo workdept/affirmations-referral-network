@@ -25,6 +25,7 @@
     "should": "^3.2.0-beta1",
     "underscore": "^1.6.0",
     "backbone": "^1.1.2",
-    "sinon": "^1.9.0"
+    "sinon": "^1.9.0",
+    "lunr": "^0.4.5"
   }
 }

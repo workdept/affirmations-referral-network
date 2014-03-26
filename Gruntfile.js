@@ -39,6 +39,15 @@ module.exports = function(grunt) {
         ]
       },
 
+      bower: {
+        files: [
+          {
+            src: 'bower_components/lunr.js/lunr.min.js',
+            dest: 'js/lunr-0.4.5.min.js'
+          }
+        ]
+      },
+
       data: {
         files: [
           {
