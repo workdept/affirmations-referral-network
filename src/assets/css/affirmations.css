@@ -66,6 +66,15 @@
   background-color: #eee;
 }
 
+#count {
+  position: absolute;
+  right: 15px;
+}
+
+#filters {
+  padding-top: 10px;
+}
+
 ul#providers {
   list-style-type: none;
   padding-left: 0;

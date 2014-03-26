@@ -65,7 +65,8 @@
 
       var opts = this._facetOptions[attr];
       var seen = {};
-      this.each(function(provider) {
+      var providers = this._faceted || this.models;
+      _.each(providers, function(provider) {
         var val = provider.get(attr);
         var vals;
 
@@ -95,6 +96,7 @@
       this._faceted = this.filter(function(provider) {
         return provider.matchesFacets(attrs);
       }, this);
+      this._facetOptions = {};
       this.trigger('facet', this._faceted);
       return this._faceted;
     }
@@ -216,7 +218,10 @@
     initialize: function(options) {
       this.filterAttribute = options.filterAttribute;
       this.label = options.label;
-    }
+      this.postInitialize();
+    },
+
+    postInitialize: function() {}
   });
   
   var SelectFilterView = FilterView.extend({
@@ -226,6 +231,11 @@
 
     events: {
       'change select': 'change'
+    },
+
+    postInitialize: function() {
+      this._selected = {};
+      this.collection.on('facet', this.renderSelect, this);
     },
 
     render: function() {
@@ -242,12 +252,12 @@
 
     renderSelect: function() {
       var $select = this.$('select');
-      var placeholder = this.placeholder || "Select an option";
 
       $select.find('option').remove();
-      //$select.append('<option value="" disabled selected>' + placeholder + '</option>');
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
-        var $el = $('<option>').attr('value', opt).html(opt).appendTo($select);
+        var $el = $('<option>').attr('value', opt).html(opt)
+          .prop('selected', this._selected[opt] === true)
+          .appendTo($select);
       }, this);
       
       return this;
@@ -255,6 +265,12 @@
 
     change: function(evt) {
       var val = this.$('select').val();
+      this._selected = {};
+      if (_.isArray(val)) {
+        _.each(val, function(selected) {
+          this._selected[selected] = true;
+        }, this);
+      }
       this.trigger('change', this.filterAttribute, val);
     }
   });
@@ -303,6 +319,36 @@
 
     $providers: function() {
       return this.$('.provider');
+    }
+  });
+
+  var ProviderCountView = Affirmations.ProviderCountView = Backbone.View.extend({
+    tagName: 'button',
+
+    attributes: {
+      id: 'count'
+    },
+
+    initialize: function(options) {
+      this.collection.on('facet', this.updateFacetedLength, this);
+      this.collection.once('sync', this.updateLength, this);
+      this.length = this.collection.length;
+    },
+
+    render: function() {
+      var label = this.length === 1 ? 'Provider' : 'Providers';
+      this.$el.html(this.length + ' ' + label + ' &#0187;');
+      return this;
+    },
+
+    updateFacetedLength: function(providers) {
+      this.length = providers.length;
+      this.render();
+    },
+
+    updateLength: function() {
+      this.length = this.collection.length;
+      this.render();
     }
   });
 
