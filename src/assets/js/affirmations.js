@@ -125,7 +125,7 @@
           type: 'select'
         },
         {
-          attribute: 'sex_gender_identity',
+          attribute: 'sexgenderidentity',
           label: "Sex/gender identity of provider",
           type: 'select'
         },
@@ -140,17 +140,17 @@
           type: 'select'
         },
         {
-          attribute: 'near_bus',
+          attribute: 'nearbus',
           label: "Near a bus line",
           type: 'checkbox'
         },
         {
-          attribute: 'completed_cultural_competency_training',
+          attribute: 'completedculturalcompetencytraining',
           label: "Has completed Affirmations' cultural competency training(s) for health providers",
           type: 'checkbox'
         },
         {
-          attribute: 'low_income',
+          attribute: 'lowincome',
           label: "Offers low-income accomodations",
           type: 'checkbox'
         }
