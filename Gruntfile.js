@@ -78,5 +78,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadTasks('./tasks');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.registerTask('default', ['newer:assemble', 'copy']);
+  grunt.registerTask('default', ['assemble', 'copy']);
 };
