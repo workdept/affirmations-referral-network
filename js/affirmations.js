@@ -12,8 +12,37 @@
 }(this, function(root, Affirmations, _, Backbone) {
   // Models
 
-  var Provider = Backbone.Model.extend({
-    idAttribute: 'id' 
+  var Provider = Affirmations.Provider = Backbone.Model.extend({
+    idAttribute: 'id',
+
+    matchesFacets: function(attrs) {
+      var attr;
+      var val;
+      var intersect;
+      var thisVal;
+
+      for (attr in attrs) {
+        val = attrs[attr];
+        thisVal = this.get(attr);
+
+        if (_.isArray(val)) {
+          if (!_.isArray(thisVal)) {
+            thisVal = [thisVal];
+          }
+          intersect = _.intersection(val, thisVal);
+          if (intersect.length === 0) {
+            return false;
+          }
+        }
+        else {
+          if (val !== thisVal) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
   });
 
 
@@ -24,21 +53,26 @@
 
     url: '/data/providers.json',
 
-    attrOptions: function(attr) {
-      this._attrOptions = this._attrOptions || {};
+    facetOptions: function(attr) {
+      this._facetOptions = this._facetOptions || {};
 
-      if (this._attrOptions[attr]) {
-        return this._attrOptions[attr];
+      if (this._facetOptions[attr]) {
+        return this._facetOptions[attr];
       }
       else {
-        this._attrOptions[attr] = []; 
+        this._facetOptions[attr] = []; 
       }
 
-      var opts = this._attrOptions[attr];
+      var opts = this._facetOptions[attr];
       var seen = {};
       this.each(function(provider) {
         var val = provider.get(attr);
         var vals;
+
+        if (val === '') {
+          return;
+        }
+
         if (_.isArray(val)) {
           vals = val;
         }
@@ -55,6 +89,14 @@
       }, this);
 
       return opts;
+    },
+
+    facet: function(attrs) {
+      this._faceted = this.filter(function(provider) {
+        return provider.matchesFacets(attrs);
+      }, this);
+      this.trigger('facet', this._faceted);
+      return this._faceted;
     }
   });
 
@@ -88,7 +130,7 @@
           type: 'select'
         },
         {
-          attribute: 'sex_gender_identity',
+          attribute: 'sexgenderidentity',
           label: "Sex/gender identity of provider",
           type: 'select'
         },
@@ -103,17 +145,17 @@
           type: 'select'
         },
         {
-          attribute: 'near_bus',
+          attribute: 'nearbus',
           label: "Near a bus line",
           type: 'checkbox'
         },
         {
-          attribute: 'completed_cultural_competency_training',
+          attribute: 'completedculturalcompetencytraining',
           label: "Has completed Affirmations' cultural competency training(s) for health providers",
           type: 'checkbox'
         },
         {
-          attribute: 'low_income',
+          attribute: 'lowincome',
           label: "Offers low-income accomodations",
           type: 'checkbox'
         }
@@ -125,9 +167,12 @@
     },
 
     initialize: function(options) {
+      this._filters = {};
       this._childViews = [];
       _.each(this.options.filters, function(filterOpts) {
-        this._childViews.push(this._createChildView(filterOpts));
+        var view = this._createChildView(filterOpts);
+        this.listenTo(view, 'change', this.handleChange, this);
+        this._childViews.push(view);
       }, this);
 
       this.collection.on('sync', this.render, this);
@@ -154,6 +199,16 @@
         this.$el.append(view.render().$el);
       }, this);
       return this;
+    },
+
+    handleChange: function(attr, val) {
+      if (!val) {
+        delete this._filters[attr];
+      }
+      else {
+        this._filters[attr] = val;
+      }
+      this.collection.facet(this._filters);
     }
   });
 
@@ -167,6 +222,10 @@
   var SelectFilterView = FilterView.extend({
     attributes: {
       class: 'form-group'
+    },
+
+    events: {
+      'change select': 'change'
     },
 
     render: function() {
@@ -187,17 +246,26 @@
 
       $select.find('option').remove();
       //$select.append('<option value="" disabled selected>' + placeholder + '</option>');
-      _.each(this.collection.attrOptions(this.filterAttribute), function(opt) {
+      _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt).appendTo($select);
       }, this);
       
       return this;
+    },
+
+    change: function(evt) {
+      var val = this.$('select').val();
+      this.trigger('change', this.filterAttribute, val);
     }
   });
 
   var CheckboxFilterView = FilterView.extend({
     attributes: {
       class: 'checkbox'
+    },
+
+    events: {
+      'change input': 'change'
     },
 
     render: function() {
@@ -208,6 +276,33 @@
         .prependTo($label);
       this.$el.append($label);
       return this;
+    },
+
+    change: function(evt) {
+      var val = this.$('input').prop('checked');
+      this.trigger('change', this.filterAttribute, val); 
+    }
+  });
+
+  var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
+    initialize: function(options) {
+      this.collection.on('facet', this.handleFacet, this);
+    },
+
+    handleFacet: function(providers) {
+      var map = {};
+      _.each(providers, function(provider) {
+        map[provider.id] = true;
+      });
+      this.$providers().each(function() {
+        var $el = $(this);
+        var id = $el.data('id');
+        $el.toggle(map[id] || false);
+      });
+    },
+
+    $providers: function() {
+      return this.$('.provider');
     }
   });
 
