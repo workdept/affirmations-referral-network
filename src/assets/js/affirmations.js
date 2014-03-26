@@ -162,6 +162,7 @@
     },
 
     initialize: function(options) {
+      this._filters = {};
       this._childViews = [];
       _.each(this.options.filters, function(filterOpts) {
         var view = this._createChildView(filterOpts);
@@ -196,9 +197,13 @@
     },
 
     handleChange: function(attr, val) {
-      var facets = {};
-      facets[attr] = val;
-      this.collection.facet(facets);
+      if (!val) {
+        delete this._filters[attr];
+      }
+      else {
+        this._filters[attr] = val;
+      }
+      this.collection.facet(this._filters);
     }
   });
 
