@@ -12,6 +12,12 @@ Install dependencies:
 npm install
 ```
 
+Install front-end dependencies:
+
+```
+bower install
+```
+
 ## Baking the providers JSON file
 
 The list of healthcare providers is stored in a Google spreadsheet, but we bake it to a static JSON file for speed.  To fetch the latest list of healthcare providers and bake it to a JSON file, run this task:
@@ -25,7 +31,7 @@ This will update the data file in ``src/data/providers.json``.
 ## Building the site
 
 ```
-grunt assemble
+grunt
 ```
 
 If you want to automatically regenerate the site as you edit files in your local environment, run:
