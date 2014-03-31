@@ -131,6 +131,7 @@
 
     resetFilters: function() {
       this.updateFiltered();
+      this.trigger('resetfilters');
     },
 
     search: function(value) {
@@ -208,6 +209,10 @@
       id: 'filters'
     },
 
+    events: {
+      'reset': 'reset' 
+    },
+
     initialize: function(options) {
       this._filters = {};
       this._childViews = [];
@@ -217,10 +222,10 @@
         this._childViews.push(view);
       }, this);
 
-      this.buttonView = new ProviderCountView({
+      this.submitButtonView = new ProviderCountView({
         collection: this.collection
       });
-      this.buttonView.on('click', function() {
+      this.submitButtonView.on('click', function() {
         this.trigger('showproviders');
       }, this);
 
@@ -247,7 +252,12 @@
       _.each(this._childViews, function(view) {
         this.$el.append(view.render().$el);
       }, this);
-      this.$el.append(this.buttonView.render().$el);
+      this.$el.append(this.submitButtonView.render().$el);
+      $('<button>')
+        .attr('type', 'reset')
+        .addClass('btn btn-default')
+        .html("Reset filters")
+        .appendTo(this.$el);
       return this;
     },
 
@@ -259,6 +269,11 @@
         this._filters[attr] = val;
       }
       this.collection.facet(this._filters);
+    },
+
+    reset: function(evt) {
+      evt.preventDefault();
+      this.collection.resetFilters();
     }
   });
 
@@ -302,9 +317,8 @@
 
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
-        var selected = this._selected ? this._selected[opt] === true : true;
         var $el = $('<option>').attr('value', opt).html(opt)
-          .prop('selected', selected)
+          .prop('selected', true)
           .appendTo($select);
       }, this);
       
@@ -313,12 +327,6 @@
 
     change: function(evt) {
       var val = this.$('select').val();
-      this._selected = {};
-      if (_.isArray(val)) {
-        _.each(val, function(selected) {
-          this._selected[selected] = true;
-        }, this);
-      }
       this.trigger('change', this.filterAttribute, val);
     }
   });
@@ -330,6 +338,10 @@
 
     events: {
       'change input': 'change'
+    },
+    
+    postInitialize: function() {
+       this.collection.on('resetfilters', this.reset, this);
     },
 
     render: function() {
@@ -345,6 +357,10 @@
     change: function(evt) {
       var val = this.$('input').prop('checked');
       this.trigger('change', this.filterAttribute, val); 
+    },
+
+    reset: function() {
+      this.$('input').prop('checked', false);
     }
   });
 
@@ -420,7 +436,6 @@
 
   var SearchView = Affirmations.SearchView = Backbone.View.extend({
     options: {
-      minLength: 3,
       placeholder: "Search by name"
     },
 
@@ -448,10 +463,8 @@
     submit: function(evt) {
       evt.preventDefault();
       var val = this.$('input').val();
-      if (val === '') {
-        this.collection.resetFilters();
-      }
-      else if (val.length >= this.options.minLength) {
+      this.collection.resetFilters();
+      if (val.length) {
         this.collection.search(val);
       }
       this.trigger('search');

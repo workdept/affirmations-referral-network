@@ -19,6 +19,10 @@
   padding-bottom: 40px;
 }
 
+#filters .btn + .btn {
+  margin-left: 10px;
+} 
+
 ul#providers {
   list-style-type: none;
   padding-left: 0;
