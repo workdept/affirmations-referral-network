@@ -382,7 +382,7 @@
     tagName: 'button',
 
     attributes: {
-      class: 'btn btn-default',
+      class: 'btn btn-primary',
       id: 'count'
     },
 
@@ -420,27 +420,33 @@
 
   var SearchView = Affirmations.SearchView = Backbone.View.extend({
     options: {
-      minLength: 3
+      minLength: 3,
+      placeholder: "Search by name"
     },
 
+    tagName: 'form',
+
     attributes: {
-      class: 'form-group'
+      class: 'navbar-form navbar-left'
     },
 
     events: {
-      'keyup input': 'change'
+      'submit': 'submit'
     },
 
     render: function() {
+      var $container = $('<div>').addClass('form-group');
       $('<input>').attr('type', 'search').addClass('form-control')
         .attr('id', 'search')
-        .attr('placeholder', "Search")
-        .appendTo(this.$el);
+        .attr('placeholder',  this.options.placeholder)
+        .appendTo($container);
+      this.$el.append($container);
       this.delegateEvents();
       return this;
     },
 
-    change: function(evt) {
+    submit: function(evt) {
+      evt.preventDefault();
       var val = this.$('input').val();
       if (val === '') {
         this.collection.resetFilters();
@@ -448,6 +454,7 @@
       else if (val.length >= this.options.minLength) {
         this.collection.search(val);
       }
+      this.trigger('search');
     }
   });
 

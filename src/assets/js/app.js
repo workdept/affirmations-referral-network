@@ -20,7 +20,7 @@
       router.navigate('', {trigger: true});
     });
 
-  //$filtersContainer.append(searchView.render().$el);
+  $('#navbar-collapse-main').append(searchView.render().$el);
   $filtersContainer.append(filtersView.$el);
   providers.url = 'data/providers.json';
   providers.fetch();
@@ -29,6 +29,10 @@
   $('#providers').before($filtersBtn);
 
   filtersView.on('showproviders', function() {
+    router.navigate('providers', {trigger: true});
+  });
+
+  searchView.on('search', function() {
     router.navigate('providers', {trigger: true});
   });
 
