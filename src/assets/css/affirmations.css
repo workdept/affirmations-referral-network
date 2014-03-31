@@ -84,6 +84,21 @@ ul#providers {
   padding-left: 0;
 }
 
+#providers .summary-only {
+  display: none;
+}
+
+#providers.summary dt,
+#providers.summary dd,
+#providers.summary .provider-attrs.secondary {
+  display: none;
+}
+
+#providers.summary .summary-include,
+#providers.summary .summary-only {
+  display: block !important;
+}
+
 .provider {
   position: relative;
   width: 100%;

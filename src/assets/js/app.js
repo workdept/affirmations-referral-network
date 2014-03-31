@@ -19,6 +19,7 @@
   var searchView = new Affirmations.SearchView({
     collection: providers
   });
+  $('#providers').addClass('summary');
   $('#offcanvas-sidebar').append(countView.$el);
   $('#offcanvas-sidebar').append(searchView.render().$el);
   $('#offcanvas-sidebar').append(filtersView.$el);
