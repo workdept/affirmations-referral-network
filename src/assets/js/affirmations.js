@@ -282,7 +282,6 @@
     },
 
     postInitialize: function() {
-      this._selected = {};
       this.collection.on('filter', this.renderSelect, this);
     },
 
@@ -303,8 +302,9 @@
 
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
+        var selected = this._selected ? this._selected[opt] === true : true;
         var $el = $('<option>').attr('value', opt).html(opt)
-          .prop('selected', this._selected[opt] === true)
+          .prop('selected', selected)
           .appendTo($select);
       }, this);
       
