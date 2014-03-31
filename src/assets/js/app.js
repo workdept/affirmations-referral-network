@@ -1,9 +1,5 @@
 (function(root, $, _, Backbone, Affirmations) {
-  function toggleOffcanvas() {
-    $('body').toggleClass('offcanvas-show');
-  }
-
-  $('.navbar-toggle').click(toggleOffcanvas);
+  var $filtersContainer = $('#filters-container');
   var AFFIRMATIONS_PROVIDERS_JSON_URL = 'data/providers.json';
   var providers = new Affirmations.Providers();
   var filtersView = new Affirmations.FiltersView({
@@ -20,10 +16,9 @@
     collection: providers
   });
   $('#providers').addClass('summary');
-  $('#offcanvas-sidebar').append(countView.$el);
-  $('#offcanvas-sidebar').append(searchView.render().$el);
-  $('#offcanvas-sidebar').append(filtersView.$el);
-  countView.$el.click(toggleOffcanvas);
+  $filtersContainer.append(countView.$el);
+  $filtersContainer.append(searchView.render().$el);
+  $filtersContainer.append(filtersView.$el);
   providers.url = 'data/providers.json';
   providers.fetch();
 })(this, jQuery, _, Backbone, Affirmations);
