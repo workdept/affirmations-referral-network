@@ -217,6 +217,13 @@
         this._childViews.push(view);
       }, this);
 
+      this.buttonView = new ProviderCountView({
+        collection: this.collection
+      });
+      this.buttonView.on('click', function() {
+        this.trigger('showproviders');
+      }, this);
+
       this.collection.on('sync', this.render, this);
     },
 
@@ -240,6 +247,7 @@
       _.each(this._childViews, function(view) {
         this.$el.append(view.render().$el);
       }, this);
+      this.$el.append(this.buttonView.render().$el);
       return this;
     },
 
@@ -359,6 +367,14 @@
 
     $providers: function() {
       return this.$('.provider');
+    },
+
+    /**
+     * Show the summary display of the provider entries rather than the full view.
+     */
+    summarize: function() {
+      this.$el.addClass('summary'); 
+      return this;
     }
   });
 
@@ -366,7 +382,12 @@
     tagName: 'button',
 
     attributes: {
+      class: 'btn btn-default',
       id: 'count'
+    },
+
+    events: {
+      'click': 'click'
     },
 
     initialize: function(options) {
@@ -377,7 +398,7 @@
 
     render: function() {
       var label = this.length === 1 ? 'Provider' : 'Providers';
-      this.$el.html(this.length + ' ' + label + ' &#0187;');
+      this.$el.html('View ' + this.length + ' ' + label + ' &#0187;');
       return this;
     },
 
@@ -389,6 +410,11 @@
     updateLength: function() {
       this.length = this.collection.length;
       this.render();
+    },
+
+    click: function(evt) {
+      evt.preventDefault();
+      this.trigger('click');
     }
   });
 
@@ -422,6 +448,13 @@
       else if (val.length >= this.options.minLength) {
         this.collection.search(val);
       }
+    }
+  });
+
+  var Router = Affirmations.Router = Backbone.Router.extend({
+    routes: {
+      '': 'index',
+      'providers': 'providers'
     }
   });
 

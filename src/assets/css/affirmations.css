@@ -14,17 +14,13 @@
   width: 100%;
 }
 
-#count {
-  position: absolute;
-  right: 15px;
-}
-
 #search {
   width: 80%;
 }
 
 #filters {
   padding-top: 10px;
+  padding-bottom: 40px;
 }
 
 ul#providers {
