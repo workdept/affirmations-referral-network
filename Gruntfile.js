@@ -3,6 +3,8 @@ module.exports = function(grunt) {
     clean: {
       project: [
         '*.html',
+        'about',
+        'contact',
         'css',
         'js',
         'data'
@@ -17,12 +19,27 @@ module.exports = function(grunt) {
 
         layoutdir: 'src/templates/layouts',
         layout: 'default.hbs',
-        partials: 'src/templates/partials/*.hbs'
+        partials: 'src/templates/partials/*.hbs',
+
+        plugins: ['assemble-contrib-permalinks'],
+
+        baseUrl: grunt.option('baseurl') || ''
       },
-      project: {
-        files: {
-          '.': ['src/templates/*.hbs' ]
-        }
+      pages: {
+        options: {
+          permalinks: {
+            structure: ':basename/index.html'
+          }
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'src/templates/',
+            src: '*.hbs',
+            dest: '.',
+            ext: '.html'
+          }
+        ]
       }
     },
 
