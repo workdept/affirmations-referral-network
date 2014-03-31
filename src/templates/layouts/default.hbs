@@ -20,27 +20,27 @@
     <link rel="stylesheet" href="{{assets}}/css/affirmations.css">
   </head>
   <body>
-    <div id="offcanvas-outer-wrap">
-      <div id="offcanvas-inner-wrap">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="outer-wrap">
+      <div id="inner-wrap">
+          <nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              {{#if show_toggle}}
-              <button type="button" class="navbar-toggle">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
                 <span class="sr-only">Toggle menu</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              {{/if}}
               <a class="navbar-brand" href="{{baseUrl}}/">Affirmations</a>
             </div>
 
-            <ul class="nav navbar-nav">
-              <li><a href="{{baseUrl}}/about">About</a></li>
-              <li><a href="{{baseUrl}}/contact">Contact Us</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar-collapse-main">
+                <ul class="nav navbar-nav">
+                  <li><a href="{{baseUrl}}/about">About</a></li>
+                  <li><a href="{{baseUrl}}/contact">Contact Us</a></li>
+                </ul>
+            </div>
 
           </div><!-- /.container-fluid -->
         </nav>
