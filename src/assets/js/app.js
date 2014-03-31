@@ -7,7 +7,7 @@
   var listView = new Affirmations.ProviderListView({
     collection: providers,
     el: $('#providers')
-  }).summarize();
+  });
   var searchView = new Affirmations.SearchView({
     collection: providers
   });
@@ -19,6 +19,14 @@
       evt.preventDefault();
       router.navigate('', {trigger: true});
     });
+  var $providersBtn = $('<button>')
+    .addClass('btn btn-default')
+    .html('Return to providers list')
+    .click(function(evt) {
+      evt.preventDefault();
+      router.navigate('providers', {trigger: true});
+    });
+
 
   $('#navbar-collapse-main').append(searchView.render().$el);
   $filtersContainer.append(filtersView.$el);
@@ -27,6 +35,11 @@
 
   listView.$el.hide();
   $('#providers').before($filtersBtn);
+  $('#providers').before($providersBtn.hide());
+
+  listView.on('detail', function(id) {
+    router.navigate('providers/' + id, {trigger: true});
+  });
 
   filtersView.on('showproviders', function() {
     router.navigate('providers', {trigger: true});
@@ -38,9 +51,16 @@
 
   router.on('route:providers', function() {
     window.scrollTo(0, 0);
+    listView.showList();
     listView.$el.show();
+    $providersBtn.hide();
     $filtersBtn.show();
     $filtersContainer.hide();
+  });
+
+  router.on('route:providerDetail', function() {
+    $filtersBtn.hide();
+    $providersBtn.show();
   });
 
   router.on('route:index', function() {
