@@ -365,6 +365,10 @@
   });
 
   var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
+    events: {
+      'click a.detail': 'clickDetail'
+    },
+
     initialize: function(options) {
       this.collection.on('filter', this.handleFilter, this);
     },
@@ -388,8 +392,28 @@
     /**
      * Show the summary display of the provider entries rather than the full view.
      */
-    summarize: function() {
+    showList: function() {
+      this.$el.removeClass('detail');
       this.$el.addClass('summary'); 
+      this.$('.provider').removeClass('detail');
+      return this;
+    },
+
+    _getIdFromUrl: function(url) {
+      return url.split('/').pop();
+    },
+
+    clickDetail: function(evt) {
+      evt.preventDefault();
+      var id = this._getIdFromUrl($(evt.target).attr('href'));
+      this.showDetail(id);
+      this.trigger('detail', id);
+    },
+
+    showDetail: function(id) {
+      this.$el.removeClass('summary');
+      this.$el.addClass('detail');
+      this.$('#provider-' + id).addClass('detail');
       return this;
     }
   });
@@ -474,7 +498,8 @@
   var Router = Affirmations.Router = Backbone.Router.extend({
     routes: {
       '': 'index',
-      'providers': 'providers'
+      'providers': 'providers',
+      'providers/:id': 'providerDetail'
     }
   });
 
