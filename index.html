@@ -20,27 +20,27 @@
     <link rel="stylesheet" href="./css/affirmations.css">
   </head>
   <body>
-    <div id="offcanvas-outer-wrap">
-      <div id="offcanvas-inner-wrap">
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div id="outer-wrap">
+      <div id="inner-wrap">
+          <nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              
-              <button type="button" class="navbar-toggle">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-main">
                 <span class="sr-only">Toggle menu</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              
-              <a class="navbar-brand" href="/affirmations-referral-network/">Affirmations</a>
+              <a class="navbar-brand" href="/">Affirmations</a>
             </div>
 
-            <ul class="nav navbar-nav">
-              <li><a href="/affirmations-referral-network/about">About</a></li>
-              <li><a href="/affirmations-referral-network/contact">Contact Us</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="navbar-collapse-main">
+                <ul class="nav navbar-nav">
+                  <li><a href="/about">About</a></li>
+                  <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
 
           </div><!-- /.container-fluid -->
         </nav>
@@ -52,9 +52,7 @@
 <p>A Google-spreadsheet backed directory of healthcare providers. These are introduction sentences for the project.</p>
 
 
-<div id="offcanvas-sidebar"></div>
-
-<h2>Providers</h2>
+<div id="filters-container"></div>
 
 <ul id="providers">
   
@@ -62,14 +60,11 @@
   <h3>Annette Richards, LMSW</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Emotional Freedom Techniques Services LLC
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Emotional Freedom Techniques Services LLC
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner</dd>
-
-  <dt>Phone</dt>
-  <dd>(248) 334-9214</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner</dd>
 
   <dt>Address</dt>
   <dd>
@@ -77,11 +72,17 @@
     Ferndale, MI 48220
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only">Ferndale</dd>
+
   <dt>Office hours</dt>
   <dd>Monday through Friday, 9am - 5pm</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://annetterichardseft.com">annetterichardseft.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">(248) 334-9214</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://annetterichardseft.com">annetterichardseft.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Blue Cross Blue Shield, Fictious Company, Signa</dd>
@@ -121,14 +122,11 @@
   <h3>Antonia Caretto, Ph.D.</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Antonia Caretto, Ph.D., PLLC
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Antonia Caretto, Ph.D., PLLC
  
-  <dt>Type</dt>
-  <dd>Physician</dd>
-
-  <dt>Phone</dt>
-  <dd>(248) 553-9053</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Physician</dd>
 
   <dt>Address</dt>
   <dd>
@@ -136,11 +134,17 @@
     Farmington Hills, MI 48336
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only">Farmington Hills</dd>
+
   <dt>Office hours</dt>
   <dd>By Appointment Monday through Thursday Noon to 9:00 pm</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://BeTreatedWell.com">BeTreatedWell.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">(248) 553-9053</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://BeTreatedWell.com">BeTreatedWell.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd></dd>
@@ -177,14 +181,11 @@
   <h3>Becky J. Smith</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Beaumont
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Beaumont
  
-  <dt>Type</dt>
-  <dd>OB/GYN, Midwife, Doula</dd>
-
-  <dt>Phone</dt>
-  <dd>(586) 566-9300</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">OB/GYN, Midwife, Doula</dd>
 
   <dt>Address</dt>
   <dd>
@@ -192,11 +193,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd></dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://drbeckysmithobgyn.com">drbeckysmithobgyn.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">(586) 566-9300</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://drbeckysmithobgyn.com">drbeckysmithobgyn.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Most Major</dd>
@@ -233,14 +240,11 @@
   <h3>Bridget Devlin DC</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Claddagh Chiropractic
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Claddagh Chiropractic
  
-  <dt>Type</dt>
-  <dd>Chiropractor, Massage Therapist</dd>
-
-  <dt>Phone</dt>
-  <dd>(248) 298-3100</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Chiropractor, Massage Therapist</dd>
 
   <dt>Address</dt>
   <dd>
@@ -248,11 +252,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>Mon, Wed 8:30-6 Tues, Thurs 9-6:30 Fri 8:30-5 Sat 8:30-12</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://claddaghchiropractic.com">claddaghchiropractic.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">(248) 298-3100</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://claddaghchiropractic.com">claddaghchiropractic.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Most major accepted</dd>
@@ -289,14 +299,11 @@
   <h3>Caprice McGrail, MD</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Mission OBGYN
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Mission OBGYN
  
-  <dt>Type</dt>
-  <dd>OB/GYN, Midwife, Doula</dd>
-
-  <dt>Phone</dt>
-  <dd>5865741313</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">OB/GYN, Midwife, Doula</dd>
 
   <dt>Address</dt>
   <dd>
@@ -304,11 +311,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>Mon-Fri 8-4</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://missionobgyn.net">missionobgyn.net</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">5865741313</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://missionobgyn.net">missionobgyn.net</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Most major. No Medicaide</dd>
@@ -345,14 +358,11 @@
   <h3>Charli Schulman PhD</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner</dd>
-
-  <dt>Phone</dt>
-  <dd>2486479624</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner</dd>
 
   <dt>Address</dt>
   <dd>
@@ -360,11 +370,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>By appointment.</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://calldrcharli.com">calldrcharli.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">2486479624</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://calldrcharli.com">calldrcharli.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>None.</dd>
@@ -401,14 +417,11 @@
   <h3>Christine C. Cantrell, PhD, LP</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Prism of Possibilities Psychotherapy
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Prism of Possibilities Psychotherapy
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner</dd>
-
-  <dt>Phone</dt>
-  <dd>248-591-2888</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner</dd>
 
   <dt>Address</dt>
   <dd>
@@ -416,11 +429,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>Mon - Thurs, 9 am - 9 pm for scheduled. client. Available Fri 9- 9 for email or phone consultation.</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://christinecantrell.com">christinecantrell.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">248-591-2888</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://christinecantrell.com">christinecantrell.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Aetna, BCBS, Cofinity, CoreSource, Humana, Medicare.</dd>
@@ -460,14 +479,11 @@
   <h3>Debra Scheck, LMSW, ACSW</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Heron Ridge Associates PLC
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Heron Ridge Associates PLC
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner, Chemical Dependency Professional</dd>
-
-  <dt>Phone</dt>
-  <dd>248-693-8880; 734-913-1093; 734-454-3560; 248-594-4991</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner, Chemical Dependency Professional</dd>
 
   <dt>Address</dt>
   <dd>
@@ -475,11 +491,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>hours for office are 8am - 9pm Monday through Thursday, Fridays 8am - 6pm, weekends by appointments</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://heronridgeassocs.com">heronridgeassocs.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">248-693-8880; 734-913-1093; 734-454-3560; 248-594-4991</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://heronridgeassocs.com">heronridgeassocs.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>most all insurance with exception of State Medicaid. Some Medicaid products offered from variety of insurance we do take, but take most all others such as BCBSM, BCN, Priority Health, HAP, Medicare, Aetna/Cofinity, please view our website for a more complete listing of insurances we accept</dd>
@@ -519,14 +541,11 @@
   <h3>Fran Brown, PsyD, LP</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Thrive Therapy Group, PC
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Thrive Therapy Group, PC
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner</dd>
-
-  <dt>Phone</dt>
-  <dd>586-260-2404</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner</dd>
 
   <dt>Address</dt>
   <dd>
@@ -534,11 +553,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>Varied hours</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://thrivetherapygroup.com">thrivetherapygroup.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">586-260-2404</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://thrivetherapygroup.com">thrivetherapygroup.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Blue Cross Blue Shield, Blue Care Network, most</dd>
@@ -575,14 +600,11 @@
   <h3>James Etzkorn, Ph. D.</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner</dd>
-
-  <dt>Phone</dt>
-  <dd>734 913-9761</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner</dd>
 
   <dt>Address</dt>
   <dd>
@@ -590,11 +612,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>10-6, M-F</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://jimetzkorn.com">jimetzkorn.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">734 913-9761</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://jimetzkorn.com">jimetzkorn.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>BCBS. I am happy to take payment and submit a claim to insurance so that any reimbursement goes to the client</dd>
@@ -634,14 +662,11 @@
   <h3>Karen J. Maier Ph.D.L.P./CEO</h3>
 
 <dl class="provider-attrs primary">
-  <dt>Agency name</dt>
-  <dd>Karalee and Associates, P.C.
+  <dt class="summary-include">Agency name</dt>
+  <dd class="summary-include">Karalee and Associates, P.C.
  
-  <dt>Type</dt>
-  <dd>Mental Health Practitioner, Chemical Dependency Professional</dd>
-
-  <dt>Phone</dt>
-  <dd>1 734 451 3440</dd>
+  <dt class="summary-include">Type</dt>
+  <dd class="summary-include">Mental Health Practitioner, Chemical Dependency Professional</dd>
 
   <dt>Address</dt>
   <dd>
@@ -649,11 +674,17 @@
     , MI 
   </dd>
 
+  <dt class="summary-include summary-only">City</dt>
+  <dd class="summary-include summary-only"></dd>
+
   <dt>Office hours</dt>
   <dd>M through F 9a.m. to 9 p.m. Sat 8-6pm</dd>
 
-  <dt>Website</dt>
-  <dd><a href="http://karaleeandassciates.com">karaleeandassciates.com</a></dd>
+  <dt class="summary-include">Phone</dt>
+  <dd class="summary-include">1 734 451 3440</dd>
+
+  <dt class="summary-include">Website</dt>
+  <dd class="summary-include"><a href="http://karaleeandassciates.com">karaleeandassciates.com</a></dd>
 
   <dt>Insurances accepted</dt>
   <dd>Medicare, Medicaid, BCBS PPOUnited Health Care, TriCare, Value options, BCN, Aetna, Priority Health ,Humana, Cigna, MESSA, State of Michigan, Employee Assistance, Molina, Great Lakes, Midwest, BCBSSA, United Behavioral Health,</dd>

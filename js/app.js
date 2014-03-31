@@ -1,10 +1,5 @@
 (function(root, $, _, Backbone, Affirmations) {
-  function toggleOffcanvas() {
-    $('body').toggleClass('offcanvas-show');
-  }
-
-  $('.navbar-toggle').click(toggleOffcanvas);
-  var AFFIRMATIONS_PROVIDERS_JSON_URL = 'data/providers.json';
+  var $filtersContainer = $('#filters-container');
   var providers = new Affirmations.Providers();
   var filtersView = new Affirmations.FiltersView({
     collection: providers
@@ -12,17 +7,48 @@
   var listView = new Affirmations.ProviderListView({
     collection: providers,
     el: $('#providers')
-  });
-  var countView = new Affirmations.ProviderCountView({
-    collection: providers
-  });
+  }).summarize();
   var searchView = new Affirmations.SearchView({
     collection: providers
   });
-  $('#offcanvas-sidebar').append(countView.$el);
-  $('#offcanvas-sidebar').append(searchView.render().$el);
-  $('#offcanvas-sidebar').append(filtersView.$el);
-  countView.$el.click(toggleOffcanvas);
+  var router = new Affirmations.Router();
+  var $filtersBtn = $('<button>')
+    .addClass('btn btn-default')
+    .html('Filter providers')
+    .click(function(evt) {
+      evt.preventDefault();
+      router.navigate('', {trigger: true});
+    });
+
+  $('#navbar-collapse-main').append(searchView.render().$el);
+  $filtersContainer.append(filtersView.$el);
   providers.url = 'data/providers.json';
   providers.fetch();
+
+  listView.$el.hide();
+  $('#providers').before($filtersBtn);
+
+  filtersView.on('showproviders', function() {
+    router.navigate('providers', {trigger: true});
+  });
+
+  searchView.on('search', function() {
+    router.navigate('providers', {trigger: true});
+  });
+
+  router.on('route:providers', function() {
+    window.scrollTo(0, 0);
+    listView.$el.show();
+    $filtersBtn.show();
+    $filtersContainer.hide();
+  });
+
+  router.on('route:index', function() {
+    window.scrollTo(0, 0);
+    listView.$el.hide();
+    $filtersBtn.hide();
+    $filtersContainer.show();
+  });
+
+  Backbone.history.start({});
 })(this, jQuery, _, Backbone, Affirmations);

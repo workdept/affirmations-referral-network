@@ -131,6 +131,7 @@
 
     resetFilters: function() {
       this.updateFiltered();
+      this.trigger('resetfilters');
     },
 
     search: function(value) {
@@ -208,6 +209,10 @@
       id: 'filters'
     },
 
+    events: {
+      'reset': 'reset' 
+    },
+
     initialize: function(options) {
       this._filters = {};
       this._childViews = [];
@@ -215,6 +220,13 @@
         var view = this._createChildView(filterOpts);
         this.listenTo(view, 'change', this.handleChange, this);
         this._childViews.push(view);
+      }, this);
+
+      this.submitButtonView = new ProviderCountView({
+        collection: this.collection
+      });
+      this.submitButtonView.on('click', function() {
+        this.trigger('showproviders');
       }, this);
 
       this.collection.on('sync', this.render, this);
@@ -240,6 +252,12 @@
       _.each(this._childViews, function(view) {
         this.$el.append(view.render().$el);
       }, this);
+      this.$el.append(this.submitButtonView.render().$el);
+      $('<button>')
+        .attr('type', 'reset')
+        .addClass('btn btn-default')
+        .html("Reset filters")
+        .appendTo(this.$el);
       return this;
     },
 
@@ -251,6 +269,11 @@
         this._filters[attr] = val;
       }
       this.collection.facet(this._filters);
+    },
+
+    reset: function(evt) {
+      evt.preventDefault();
+      this.collection.resetFilters();
     }
   });
 
@@ -274,7 +297,6 @@
     },
 
     postInitialize: function() {
-      this._selected = {};
       this.collection.on('filter', this.renderSelect, this);
     },
 
@@ -296,7 +318,7 @@
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt)
-          .prop('selected', this._selected[opt] === true)
+          .prop('selected', true)
           .appendTo($select);
       }, this);
       
@@ -305,12 +327,6 @@
 
     change: function(evt) {
       var val = this.$('select').val();
-      this._selected = {};
-      if (_.isArray(val)) {
-        _.each(val, function(selected) {
-          this._selected[selected] = true;
-        }, this);
-      }
       this.trigger('change', this.filterAttribute, val);
     }
   });
@@ -322,6 +338,10 @@
 
     events: {
       'change input': 'change'
+    },
+    
+    postInitialize: function() {
+       this.collection.on('resetfilters', this.reset, this);
     },
 
     render: function() {
@@ -337,6 +357,10 @@
     change: function(evt) {
       var val = this.$('input').prop('checked');
       this.trigger('change', this.filterAttribute, val); 
+    },
+
+    reset: function() {
+      this.$('input').prop('checked', false);
     }
   });
 
@@ -359,6 +383,14 @@
 
     $providers: function() {
       return this.$('.provider');
+    },
+
+    /**
+     * Show the summary display of the provider entries rather than the full view.
+     */
+    summarize: function() {
+      this.$el.addClass('summary'); 
+      return this;
     }
   });
 
@@ -366,7 +398,12 @@
     tagName: 'button',
 
     attributes: {
+      class: 'btn btn-primary',
       id: 'count'
+    },
+
+    events: {
+      'click': 'click'
     },
 
     initialize: function(options) {
@@ -377,7 +414,7 @@
 
     render: function() {
       var label = this.length === 1 ? 'Provider' : 'Providers';
-      this.$el.html(this.length + ' ' + label + ' &#0187;');
+      this.$el.html('View ' + this.length + ' ' + label + ' &#0187;');
       return this;
     },
 
@@ -389,39 +426,55 @@
     updateLength: function() {
       this.length = this.collection.length;
       this.render();
+    },
+
+    click: function(evt) {
+      evt.preventDefault();
+      this.trigger('click');
     }
   });
 
   var SearchView = Affirmations.SearchView = Backbone.View.extend({
     options: {
-      minLength: 3
+      placeholder: "Search by name"
     },
 
+    tagName: 'form',
+
     attributes: {
-      class: 'form-group'
+      class: 'navbar-form navbar-left'
     },
 
     events: {
-      'keyup input': 'change'
+      'submit': 'submit'
     },
 
     render: function() {
+      var $container = $('<div>').addClass('form-group');
       $('<input>').attr('type', 'search').addClass('form-control')
         .attr('id', 'search')
-        .attr('placeholder', "Search")
-        .appendTo(this.$el);
+        .attr('placeholder',  this.options.placeholder)
+        .appendTo($container);
+      this.$el.append($container);
       this.delegateEvents();
       return this;
     },
 
-    change: function(evt) {
+    submit: function(evt) {
+      evt.preventDefault();
       var val = this.$('input').val();
-      if (val === '') {
-        this.collection.resetFilters();
-      }
-      else if (val.length >= this.options.minLength) {
+      this.collection.resetFilters();
+      if (val.length) {
         this.collection.search(val);
       }
+      this.trigger('search');
+    }
+  });
+
+  var Router = Affirmations.Router = Backbone.Router.extend({
+    routes: {
+      '': 'index',
+      'providers': 'providers'
     }
   });
 
