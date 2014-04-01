@@ -55,10 +55,20 @@ npm install -g  npm install http-server -g
 Then serve the built files
 
 ```
-http-server
+http-server ./dist
 ```
 
 If you visit http://localhost:8080 in your browser, you'll see the generated site.
+
+## Deploying the site
+
+The site is intended to be deployed on [GitHub pages](https://pages.github.com/), with the help of [grunt-build-control](https://github.com/robwierzbowski/grunt-build-control).
+
+To build and deploy the site
+
+```
+grunt deploy
+``` 
 
 ## Editing content
 
