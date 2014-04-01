@@ -123,4 +123,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-build-control');
   grunt.loadTasks('./tasks');
   grunt.registerTask('default', ['assemble', 'copy']);
+  grunt.registerTask('deploy', ['assemble', 'copy', 'buildcontrol']);
 };
