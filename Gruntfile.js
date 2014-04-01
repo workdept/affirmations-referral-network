@@ -16,7 +16,7 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         flatten: true,
-        assets: '',
+        assets: 'dist',
         data:   'src/data/*.json',
 
         layoutdir: 'src/templates/layouts',
