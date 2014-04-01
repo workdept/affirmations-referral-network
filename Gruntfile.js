@@ -1,13 +1,15 @@
 module.exports = function(grunt) {
+  var distDir = 'dist';
+
   grunt.initConfig({
     clean: {
       project: [
-        '*.html',
-        'about',
-        'contact',
-        'css',
-        'js',
-        'data'
+        'dist/*.html',
+        'dist/about',
+        'dist/contact',
+        'dist/css',
+        'dist/js',
+        'dist/data'
       ]
     },
 
@@ -36,7 +38,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'src/templates/',
             src: '*.hbs',
-            dest: '.',
+            dest: 'dist',
             ext: '.html'
           }
         ]
@@ -51,7 +53,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'src/assets/',
             src: ['**'],
-            dest: __dirname 
+            dest: 'dist' 
           }
         ]
       },
@@ -60,7 +62,7 @@ module.exports = function(grunt) {
         files: [
           {
             src: 'bower_components/lunr.js/lunr.min.js',
-            dest: 'js/lunr-0.4.5.min.js'
+            dest: 'dist/js/lunr-0.4.5.min.js'
           }
         ]
       },
@@ -71,7 +73,7 @@ module.exports = function(grunt) {
             expand: true,
             cwd: 'src/data/',
             src: ['**'], 
-            dest: __dirname + '/data/'
+            dest: 'dist/data'
           }
         ]
       }
@@ -95,6 +97,21 @@ module.exports = function(grunt) {
         spreadsheetId: '1eU0mrtMWv7MQnqu-n4zG4V5Dr5toN2r7diM3sz6hdQU',
         output: 'src/data/providers.json'
       }
+    },
+
+    buildcontrol: {
+      options: {
+        dir: 'dist',
+        commit: true,
+        push: true,
+        message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+      },
+      pages: {
+        options: {
+          remote: 'https://github.com/workdept/affirmations-referral-network.git',
+          branch: 'gh-pages'
+        }
+      }
     }
   });
 
@@ -102,7 +119,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.loadTasks('./tasks');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-build-control');
+  grunt.loadTasks('./tasks');
   grunt.registerTask('default', ['assemble', 'copy']);
 };
