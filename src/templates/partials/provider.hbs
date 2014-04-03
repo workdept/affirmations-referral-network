@@ -7,46 +7,69 @@
   <dt class="summary-include">Type</dt>
   <dd class="summary-include">{{join type ", "}}</dd>
 
+  {{#if streetaddress}}
   <dt>Address</dt>
   <dd>
     {{streetaddress}}<br />
-    {{city}}, {{state}} {{zip}}
+    {{city}}{{#if state}}, {{state}} {{zip}}{{/if}}
   </dd>
+  {{/if}}
 
+  {{#if city}}
   <dt class="summary-include summary-only">City</dt>
   <dd class="summary-include summary-only">{{city}}</dd>
+  {{/if}}
 
+  {{#if officehours}}
   <dt>Office hours</dt>
   <dd>{{officehours}}</dd>
+  {{/if}}
 
+  {{#if phone}}
   <dt class="summary-include">Phone</dt>
   <dd class="summary-include">{{phone}}</dd>
+  {{/if}}
 
+  {{#if website}}
   <dt class="summary-include">Website</dt>
   <dd class="summary-include"><a href="http://{{website}}">{{website}}</a></dd>
+  {{/if}}
 
+  {{#if insurancesaccepted}}
   <dt>Insurances accepted</dt>
   <dd>{{insurancesaccepted}}</dd>
+  {{/if}}
 
   <dt>Offers low-income accommodations?</dt>
   <dd>{{#if lowincome}}Yes{{else}}No{{/if}}</dd>
 </dl>
 
 <dl class="provider-attrs secondary">
+  {{#if orientation}}
   <dt>Sexual/attractional orientation of provider</dt>
   <dd>{{orientation}}</dd>
+  {{/if}}
 
+  {{#if specialties}}
   <dt>Other Specialties and Sensitivities</dt>
   <dd class="odd">{{join specialties ", "}}</dd>
+  {{/if}}
 
+
+  {{#if sexgenderidentity}}
   <dt>Sex/gender identity of provider</dt>
   <dd>{{sexgenderidentity}}</dd>
+  {{/if}}
 
+  {{#if race}}
   <dt>Race/ethnicity identity of provider</dt>
   <dd>{{race}}</dd>
+  {{/if}}
 
+  {{#if languages}}
   <dt>Languages spoken</dt>
   <dd>{{join languages ", "}}</dd>
+  {{/if}}
 
   {{#if trainings}}
   <dt>Relevant trainings</dt>
