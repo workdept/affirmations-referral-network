@@ -99,6 +99,13 @@ module.exports = function(grunt) {
       }
     },
 
+    writecnamefile: {
+      project: {
+        dir: distDir,
+        domain: 'health.goaffirmations.org'
+      }
+    },
+
     buildcontrol: {
       options: {
         dir: 'dist',
@@ -123,5 +130,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-build-control');
   grunt.loadTasks('./tasks');
   grunt.registerTask('default', ['assemble', 'copy']);
-  grunt.registerTask('deploy', ['assemble', 'copy', 'buildcontrol']);
+  grunt.registerTask('deploy', ['assemble', 'copy', 'writecnamefile', 'buildcontrol']);
 };
