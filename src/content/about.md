@@ -1,8 +1,8 @@
-This Health & Wellness Network is a project of <a href="http://www.goaffirmations.org" target="_blank">Affirmations</a> - Metro Detroit’s LGBT community center for lesbian, gay, bisexual & transgender (LGBT) people and their allies. Affirmations' <a href="http://www.goaffirmations.org/?page=programservices_hlth" target="_blank">Health & Wellness</a> program area works to address LGBT health inequities by improving the health and well-being of LGBT individuals and communities through professional training and development, LGBT-affirming mental health services, community education, coalition building, and connecting LGBT people to health resources.
+The Health & Wellness Network is a project of <a href="http://www.goaffirmations.org" target="_blank">Affirmations</a> - Metro Detroit’s LGBT community center for lesbian, gay, bisexual & transgender (LGBT) people and their allies. Affirmations' <a href="http://www.goaffirmations.org/?page=programservices_hlth" target="_blank">Health & Wellness</a> program area works to address LGBT health inequities by improving the health and well-being of LGBT individuals and communities through professional training and development, LGBT-affirming mental health services, community education, coalition building, and connecting LGBT people to health resources.
 
-On this site you will find a searchable database of healthcare providers in southeastern Michigan who have signed our Community Standards of Practice listed below. If you are healthcare provider who is interested in joining this Health & Wellness Network, please [contact us](contact/) for more information. 
+On this site you will find a searchable database of healthcare providers in Southeastern Michigan who have signed our Community Standards of Practice listed below. If you are healthcare provider who is interested in joining this Health & Wellness Network, please [contact us](contact/) for more information. 
 
-Health care providers that appear on our referral list have agreed to abide by our Community Standards of Practice - beyond this, Affirmations disclaims any affiliation or association with these service providers and further disclaims any liability for the actions, inactions or quality of care provided by these individuals or organizations.
+_Health care providers that appear on our referral list have agreed to abide by our Community Standards of Practice - beyond this, Affirmations disclaims any affiliation or association with these service providers and further disclaims any liability for the actions, inactions or quality of care provided by these individuals or organizations._
 
 ## Community Standards of Practice
 
@@ -34,4 +34,4 @@ Health care providers that appear on our referral list have agreed to abide by o
 
 * Contact information for a provider is no longer accurate and has not been updated.
 * Three or more general complaints have been received by Affirmations regarding services rendered, and these issues have not been resolved in an adequate manner.
-* Affirmations ultimately reserves the right to remove any agency or clinic from the list at any time.
+* Affirmations reserves the right to remove any agency or clinic from the list at any time.
