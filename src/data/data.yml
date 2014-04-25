@@ -1,0 +1,6 @@
+# This file contains variables that will be directly loaded into the root
+# template context. See http://assemble.io/docs/Context.html
+
+# Google Analytics variables
+ga_tracking_id: UA-39686839-3
+ga_domain: goaffirmations.org

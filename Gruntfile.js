@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       options: {
         flatten: true,
         assets: 'dist',
-        data:   'src/data/*.json',
+        data:   ['src/data/*.json', 'src/data/*.yml'],
 
         layoutdir: 'src/templates/layouts',
         layout: 'default.hbs',
