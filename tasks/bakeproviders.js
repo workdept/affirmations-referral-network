@@ -26,6 +26,10 @@ module.exports = function(grunt) {
           d.type = splitValues(d.type);
           d.specialties = splitValues(d.specialties);
           d.languages = splitValues(d.languages);
+          d.county = splitValues(d.county);
+          d.orientation = splitValues(d.orientation);
+          d.sexgenderidentity = splitValues(d.sexgenderidentity);
+          d.race = splitValues(d.race);
         }
         fs.writeFile(outputFile, JSON.stringify(data), function(err) {
           if (err) {
