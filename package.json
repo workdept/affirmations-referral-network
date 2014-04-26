@@ -20,7 +20,7 @@
     "grunt-contrib-clean": "^0.5.0",
     "google-spreadsheet": "^0.2.8",
     "grunt-contrib-watch": "^0.6.1",
-    "tabletop": "git://github.com/ghing/tabletop.git#45-no_empty_query",
+    "tabletop": "git://github.com/ghing/tabletop.git#support-new-sheets",
     "mocha": "^1.18.2",
     "should": "^3.2.0-beta1",
     "underscore": "^1.6.0",
