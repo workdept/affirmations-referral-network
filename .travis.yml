@@ -1,3 +1,10 @@
 language: node_js
 node_js:
-  - "0.10"
+- '0.10'
+env:
+  global:
+    secure: ekyIq8oVzV/Tlci2AHtEskxQcKHgdnf8fwxVgwZ/FzZN8jMiGxkhxuV78G2//HfNqVyl/ynKS5nIp5IcCXM23zn0N8ifeo9zlH1XKL7vrqZQZhTCTRTxnTiDdU1MSvmxGzmjy0lcu25XtF91Hapul3EoKFckEpN4P9ObuRUtSVI=
+after_success:
+  - sudo npm install -g bower
+  - bower install
+  - grunt deploytravis

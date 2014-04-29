@@ -118,6 +118,12 @@ module.exports = function(grunt) {
           remote: 'https://github.com/workdept/affirmations-referral-network.git',
           branch: 'gh-pages'
         }
+      },
+      travis: {
+        options: {
+          remote: 'https://' + process.env.GH_TOKEN + '@' + 'workdept/affirmations-referral-network.git',
+          branch: 'gh-pages'
+        }
       }
     }
   });
@@ -130,5 +136,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-build-control');
   grunt.loadTasks('./tasks');
   grunt.registerTask('default', ['assemble', 'copy']);
-  grunt.registerTask('deploy', ['assemble', 'copy', 'writecnamefile', 'buildcontrol']);
+  grunt.registerTask('predeploy', ['assemble', 'copy', 'writecnamefile']);
+  grunt.registerTask('deploy', ['predeploy', 'buildcontrol:pages']);
+  grunt.registerTask('deploytravis', ['predeploy', 'buildcontrol:travis']);
 };
