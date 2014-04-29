@@ -30,7 +30,7 @@ _Health care providers that appear on our referral list have agreed to abide by 
 
 * If the provider is connected to hospitals where they would send lesbian, gay, bisexual and transgender patients, the hospital board of directors and other institutional bodies shall be encouraged to have representation from these communities.
 
-## Providers may be removed from Affirmations’ Health & Wellness Network for the following reasons:
+**Providers may be removed from Affirmations’ Health & Wellness Network for the following reasons:**
 
 * Contact information for a provider is no longer accurate and has not been updated.
 * Three or more general complaints have been received by Affirmations regarding services rendered, and these issues have not been resolved in an adequate manner.
