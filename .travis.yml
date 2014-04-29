@@ -7,4 +7,6 @@ env:
 after_success:
   - npm install -g bower grunt-cli
   - bower install
+  - git config user.name "Travis-CI"
+  - git config user.email "travisci@theworkdept.com"
   - grunt deploytravis
