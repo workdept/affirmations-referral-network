@@ -1,46 +1,21 @@
 var fs = require('fs');
-var Tabletop = require('tabletop');
+var bakeProviders = require('../lib/bake');
 
 module.exports = function(grunt) {
-  var multiValueDelimiter = /;\s*/; 
-
-  function splitValues(val) {
-    return val.split(multiValueDelimiter).filter(function(s) {
-      return s !== "";
-    });
-  }
-
   grunt.registerMultiTask('bakeproviders', 'Bake provider list to JSON', function() {
     var done = this.async();
     var spreadsheetId = this.data.spreadsheetId;
     var outputFile = this.data.output;
-    Tabletop.init({
-      key: spreadsheetId,
-      callback: function(data, tabletop) {
-        var d;
-        for (var i = 0; i < data.length; i++) {
-          d = data[i];
-          d.nearbus = d.nearbus.toLowerCase() === 'true' ? true : false;
-          d.lowincome = d.lowincome.toLowerCase() === 'true' ? true : false;
-          d.completedculturalcompetencytraining = d.completedculturalcompetencytraining.toLowerCase() === 'true' ? true : false; 
-          d.type = splitValues(d.type);
-          d.specialties = splitValues(d.specialties);
-          d.languages = splitValues(d.languages);
-          d.county = splitValues(d.county);
-          d.orientation = splitValues(d.orientation);
-          d.sexgenderidentity = splitValues(d.sexgenderidentity);
-          d.race = splitValues(d.race);
+
+    bakeProviders(spreadsheetId, function(err, warnings, data) {
+      fs.writeFile(outputFile, JSON.stringify(data), function(err) {
+        if (err) {
+          grunt.fatal(err);
         }
-        fs.writeFile(outputFile, JSON.stringify(data), function(err) {
-          if (err) {
-            grunt.fatal(err);
-          }
-          else {
-            done();
-          }
-        });
-      },
-      simpleSheet: true
+        else {
+          done();
+        }
+      });
     });
   });
 };
