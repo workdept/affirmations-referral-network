@@ -93,9 +93,14 @@ module.exports = function(grunt) {
     },
 
     bakeproviders: {
-      project: {
+      local: {
         spreadsheetId: '1eU0mrtMWv7MQnqu-n4zG4V5Dr5toN2r7diM3sz6hdQU',
         output: 'src/data/providers.json'
+      },
+      github: {
+        spreadsheetId: '1eU0mrtMWv7MQnqu-n4zG4V5Dr5toN2r7diM3sz6hdQU',
+        output: 'src/data/providers.json',
+        provider: 'github'
       }
     },
 

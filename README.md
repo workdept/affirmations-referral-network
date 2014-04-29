@@ -23,7 +23,7 @@ bower install
 The list of healthcare providers is stored in a Google spreadsheet, but we bake it to a static JSON file for speed.  To fetch the latest list of healthcare providers and bake it to a JSON file, run this task:
 
 ```
-grunt bakeproviders
+grunt bakeproviders:local
 ```
 
 This will update the data file in ``src/data/providers.json``.
