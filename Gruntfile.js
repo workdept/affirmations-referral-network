@@ -121,7 +121,7 @@ module.exports = function(grunt) {
       },
       travis: {
         options: {
-          remote: 'https://' + process.env.GH_TOKEN + '@' + 'workdept/affirmations-referral-network.git',
+          remote: 'https://' + process.env.GH_TOKEN + '@' + 'github.com/workdept/affirmations-referral-network.git',
           branch: 'gh-pages'
         }
       }
