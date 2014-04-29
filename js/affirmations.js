@@ -10,7 +10,7 @@
     // Browser globale
     root.Affirmations = factory(root, root.Affirmations || {}, root._, root.Backbone, root.lunr);
   }
-}(this, function(root, Affirmations, _, Backbone) {
+}(this, function(root, Affirmations, _, Backbone, lunr) {
   // Models
 
   var Provider = Affirmations.Provider = Backbone.Model.extend({
