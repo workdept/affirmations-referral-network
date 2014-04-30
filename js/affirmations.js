@@ -273,6 +273,7 @@
 
     reset: function(evt) {
       evt.preventDefault();
+      this._filters = {};
       this.collection.resetFilters();
     }
   });
