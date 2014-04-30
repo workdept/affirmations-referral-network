@@ -298,6 +298,7 @@
 
     postInitialize: function() {
       this.collection.on('filter', this.renderSelect, this);
+      this.collection.on('resetfilters', this.deselectAll, this);
     },
 
     render: function() {
@@ -308,17 +309,25 @@
         .attr('multiple', 'multiple')
         .addClass('form-control')
         .appendTo(this.$el);
-      this.renderSelect();
+      this.renderSelect(false);
       return this;
     },
 
-    renderSelect: function() {
+    /**
+     * Render the HTML select element for this view.
+     *
+     * @param {boolean} selected - true if options should have selected
+     *   attribute set.  Otherwise, false.
+     *
+     */
+    renderSelect: function(selected) {
+      selected = selected === false ? false : true;
       var $select = this.$('select');
 
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt)
-          .prop('selected', true)
+          .prop('selected', selected)
           .appendTo($select);
       }, this);
       
@@ -328,6 +337,10 @@
     change: function(evt) {
       var val = this.$('select').val();
       this.trigger('change', this.filterAttribute, val);
+    },
+
+    deselectAll: function() {
+      this.$('option').prop('selected', false);
     }
   });
 
