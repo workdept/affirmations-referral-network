@@ -146,7 +146,6 @@
 
   // Views
   
-
   var FiltersView = Affirmations.FiltersView = Backbone.View.extend({
     tagName: 'form',
 
@@ -379,6 +378,10 @@
   });
 
   var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
+    events: {
+      'click .provider-attrs a': 'handleClickLink'
+    },
+
     initialize: function(options) {
       this.collection.on('filter', this.handleFilter, this);
     },
@@ -414,6 +417,12 @@
       this.$el.addClass('detail');
       this.$('#provider-' + id).addClass('detail');
       return this;
+    },
+
+    handleClickLink: function(evt) {
+      evt.preventDefault();
+      var url = $(evt.target).attr('href');
+      window.open(url);
     }
   });
 
