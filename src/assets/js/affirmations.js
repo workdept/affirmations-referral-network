@@ -379,10 +379,6 @@
   });
 
   var ProviderListView = Affirmations.ProviderListView = Backbone.View.extend({
-    events: {
-      'click a.detail': 'clickDetail'
-    },
-
     initialize: function(options) {
       this.collection.on('filter', this.handleFilter, this);
     },
@@ -411,17 +407,6 @@
       this.$el.addClass('summary'); 
       this.$('.provider').removeClass('detail');
       return this;
-    },
-
-    _getIdFromUrl: function(url) {
-      return url.split('/').pop();
-    },
-
-    clickDetail: function(evt) {
-      evt.preventDefault();
-      var id = this._getIdFromUrl($(evt.target).attr('href'));
-      this.showDetail(id);
-      this.trigger('detail', id);
     },
 
     showDetail: function(id) {
