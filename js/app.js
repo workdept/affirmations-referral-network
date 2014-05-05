@@ -55,6 +55,7 @@
   });
 
   router.on('route:providerDetail', function(id) {
+    window.scrollTo(0, 0);
     $filtersBtn.hide();
     listView.showDetail(id);
     listView.$el.show();
