@@ -1,3 +1,15 @@
+h1,.h1 {
+  font-size: 30px;
+}
+
+h2,.h1 {
+  font-size: 24px;
+}
+
+h3,.h3 {
+  font-size: 18px;
+}
+
 #main {
   padding-top: 50px;
 }
