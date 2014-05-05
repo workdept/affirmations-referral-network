@@ -37,10 +37,6 @@
   $('#providers').before($filtersBtn);
   $('#providers').before($providersBtn.hide());
 
-  listView.on('detail', function(id) {
-    router.navigate('providers/' + id, {trigger: true});
-  });
-
   filtersView.on('showproviders', function() {
     router.navigate('providers', {trigger: true});
   });
@@ -58,9 +54,12 @@
     $filtersContainer.hide();
   });
 
-  router.on('route:providerDetail', function() {
+  router.on('route:providerDetail', function(id) {
     $filtersBtn.hide();
+    listView.showDetail(id);
+    listView.$el.show();
     $providersBtn.show();
+    $filtersContainer.hide();
   });
 
   router.on('route:index', function() {
