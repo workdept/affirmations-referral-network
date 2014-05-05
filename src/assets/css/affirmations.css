@@ -97,6 +97,10 @@ ul#providers {
     border-bottom: 1px solid #ddd;
   }
 
+  .provider-attrs dd {
+    padding-right: 10px;
+  }
+
   .provider-attrs.secondary dt,
   .provider-attrs.secondary dd {
     border-top: 1px solid #ddd;
@@ -115,6 +119,5 @@ ul#providers {
     width: 50%;
     float: left;
     padding-left: 10px;
-    padding-right: 10px;
   }
 } 
