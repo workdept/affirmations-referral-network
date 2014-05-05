@@ -474,7 +474,8 @@
     tagName: 'form',
 
     attributes: {
-      class: 'navbar-form navbar-left'
+      class: 'navbar-form navbar-left',
+      id: 'search-form'
     },
 
     events: {
@@ -482,10 +483,18 @@
     },
 
     render: function() {
-      var $container = $('<div>').addClass('form-group');
+      var $container = $('<div>').addClass('input-group');
+      var $icon = $('<span>').addClass('glyphicon glyphicon-search');
+      var $btn = $('<button>').attr('type', 'submit')
+        .addClass('btn btn-default')
+        .attr('title', "Search")
+        .append($icon);
       $('<input>').attr('type', 'search').addClass('form-control')
         .attr('id', 'search')
         .attr('placeholder',  this.options.placeholder)
+        .appendTo($container);
+      $('<span>').addClass('input-group-btn')
+        .append($btn)
         .appendTo($container);
       this.$el.append($container);
       this.delegateEvents();
