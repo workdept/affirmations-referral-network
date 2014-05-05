@@ -83,6 +83,10 @@ ul#providers {
 }
 
 @media (min-width: 768px) {
+  #search-form {
+    width: 400px;
+  }
+  
   .provider-attrs {
     overflow: hidden;
     min-height: 1px;
