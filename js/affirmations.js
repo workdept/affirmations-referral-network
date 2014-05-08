@@ -330,6 +330,14 @@
           .prop('selected', selected)
           .appendTo($select);
       }, this);
+      if ($select.find('option').length === 0) {
+        $select.attr('disabled', 'disabled');
+        this.$('label').addClass('disabled');
+      }
+      else {
+        $select.removeAttr('disabled');
+        this.$('label').removeClass('disabled');
+      }
       
       return this;
     },
