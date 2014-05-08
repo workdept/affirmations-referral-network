@@ -31,6 +31,10 @@ h3,.h3 {
   padding-bottom: 40px;
 }
 
+#filters .btn {
+  margin-bottom: 10px;
+}
+
 #filters .btn + .btn {
   margin-left: 10px;
 } 
