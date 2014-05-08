@@ -323,6 +323,7 @@
     renderSelect: function(selected) {
       selected = selected === false ? false : true;
       var $select = this.$('select');
+      var numOptions;
 
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
@@ -330,15 +331,20 @@
           .prop('selected', selected)
           .appendTo($select);
       }, this);
-      if ($select.find('option').length === 0) {
+
+      numOptions = $select.find('option').length;
+      if (numOptions === 0) {
         $select.attr('disabled', 'disabled');
         this.$('label').addClass('disabled');
+        $select.removeAttr('size');
       }
       else {
         $select.removeAttr('disabled');
         this.$('label').removeClass('disabled');
+        $select.attr('size', numOptions); 
       }
       
+
       return this;
     },
 
