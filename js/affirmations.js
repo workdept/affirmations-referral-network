@@ -248,15 +248,15 @@
     },
 
     render: function(options) {
-      _.each(this._childViews, function(view) {
-        this.$el.append(view.render().$el);
-      }, this);
       this.$el.append(this.submitButtonView.render().$el);
       $('<button>')
         .attr('type', 'reset')
         .addClass('btn btn-default')
         .html("Reset filters")
         .appendTo(this.$el);
+      _.each(this._childViews, function(view) {
+        this.$el.append(view.render().$el);
+      }, this);
       return this;
     },
 
