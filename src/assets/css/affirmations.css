@@ -39,6 +39,10 @@ h3,.h3 {
   margin-left: 10px;
 } 
 
+#filters label.disabled {
+  color: #999;
+}
+
 ul#providers {
   list-style-type: none;
   padding-left: 0;
