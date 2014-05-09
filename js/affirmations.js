@@ -566,7 +566,6 @@
      */
     handleFacet: function(filtered, attrs) {
       this._filters = attrs;
-      console.debug(this._filters);
       this.render();
     },
 
