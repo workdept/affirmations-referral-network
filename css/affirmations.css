@@ -26,6 +26,41 @@ h3,.h3 {
   width: 100%;
 }
 
+.filter-summary {
+  padding-bottom: 10px;
+}
+
+.filter-summary .label {
+  color: #333;
+  font-size: 14px;
+  padding: 0;
+}
+
+.filter-summary .label::after {
+  content: ": ";
+}
+
+.filter-summary ul,
+.filter-summary li {
+  display: inline;
+}
+
+.filter-summary ul {
+  padding-left: 0;
+}
+
+.filter-summary li {
+  padding-right: 4px;
+}
+
+.filter-summary li::after {
+  content: ",";
+}
+
+.filter-summary li:last-child::after {
+  content: "";
+}
+
 #filters {
   padding-top: 10px;
   padding-bottom: 40px;
