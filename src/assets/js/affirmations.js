@@ -309,49 +309,71 @@
         .attr('multiple', 'multiple')
         .addClass('form-control')
         .appendTo(this.$el);
-      this.renderSelect(false);
+      this.renderSelect();
       return this;
     },
 
     /**
      * Render the HTML select element for this view.
      *
-     * @param {boolean} selected - true if options should have selected
-     *   attribute set.  Otherwise, false.
-     *
      */
-    renderSelect: function(selected) {
-      selected = selected === false ? false : true;
+    renderSelect: function() {
       var $select = this.$('select');
+      // If the select has a value, save it to reselect the selected values
+      var selectedVals = $select.val() || [];
       var numOptions;
 
       $select.find('option').remove();
       _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
         var $el = $('<option>').attr('value', opt).html(opt)
-          .prop('selected', selected)
           .appendTo($select);
       }, this);
 
+      _.each(selectedVals, function(val) {
+        $select.find('option[value="' + val + '"]').attr('selected', 'selected');
+      }, this);
+
       numOptions = $select.find('option').length;
-      if (numOptions === 0) {
-        $select.attr('disabled', 'disabled');
-        this.$('label').addClass('disabled');
-        $select.removeAttr('size');
-      }
-      else {
-        $select.removeAttr('disabled');
-        this.$('label').removeClass('disabled');
-        $select.attr('size', numOptions); 
-      }
-      
+      this._toggleDisabled($select, numOptions);
+      this._sizeSelect($select, numOptions);
 
       return this;
     },
 
-    change: function(evt) {
+    /**
+     * If a filter select has no available options, disable it.
+     */
+    _toggleDisabled: function($select, numOptions) {
+      if (numOptions === 0) {
+        $select.attr('disabled', 'disabled');
+        this.$('label').addClass('disabled');
+      }
+      else {
+        $select.removeAttr('disabled');
+        this.$('label').removeClass('disabled');
+      }
+    },
+
+    /**
+     * Set a select element's size attribute based on the number of options.
+     */
+    _sizeSelect: function($select, numOptions) {
+      if (numOptions === 0) {
+        $select.removeAttr('size');
+      }
+      else {
+        $select.attr('size', numOptions); 
+      }
+    },
+
+    /**
+     * Debounce for one second to allow for selecting multiple values before
+     * changing.
+     */
+    change: _.debounce(function(evt) {
       var val = this.$('select').val();
       this.trigger('change', this.filterAttribute, val);
-    },
+    }, 1000),
 
     deselectAll: function() {
       this.$('option').prop('selected', false);
