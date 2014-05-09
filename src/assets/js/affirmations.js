@@ -371,12 +371,10 @@
       }
     },
 
-    change: _.debounce(function(evt) {
-      // Debounce for one second to allow for selecting multiple values before
-      // changing
+    change: function(evt) {
       var val = this.$('select').val();
       this.trigger('change', this.filterAttribute, val);
-    }, 1000),
+    },
 
     deselectAll: function() {
       this.$('option').prop('selected', false);
