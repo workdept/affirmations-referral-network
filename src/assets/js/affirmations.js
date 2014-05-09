@@ -125,7 +125,7 @@
       this.updateFiltered(this.filter(function(provider) {
         return provider.matchesFacets(attrs);
       }, this));
-      this.trigger('facet', this._filtered);
+      this.trigger('facet', this._filtered, attrs);
       return this._filtered;
     },
 
@@ -221,6 +221,10 @@
         this._childViews.push(view);
       }, this);
 
+      this.summaryView = new FilterSummaryView({
+        collection: this.collection
+      });
+
       this.submitButtonView = new ProviderCountView({
         collection: this.collection
       });
@@ -248,6 +252,7 @@
     },
 
     render: function(options) {
+      this.$el.append(this.summaryView.render().$el);
       this.$el.append(this.submitButtonView.render().$el);
       $('<button>')
         .attr('type', 'reset')
@@ -366,11 +371,9 @@
       }
     },
 
-    /**
-     * Debounce for one second to allow for selecting multiple values before
-     * changing.
-     */
     change: _.debounce(function(evt) {
+      // Debounce for one second to allow for selecting multiple values before
+      // changing
       var val = this.$('select').val();
       this.trigger('change', this.filterAttribute, val);
     }, 1000),
@@ -499,6 +502,79 @@
     click: function(evt) {
       evt.preventDefault();
       this.trigger('click');
+    }
+  });
+
+  var FilterSummaryView = Backbone.View.extend({
+    attributes: {
+      class: "filter-summary"
+    },
+
+    options: {
+      label: "Filters selected",
+      noneLabel: "None",
+      checkboxLabels: {
+        'nearbus': "Near a bus line",
+        'completedculturalcompetencytraining': "Completed Affirmations traning",
+        'lowincome': "Offers low-income accomodations"
+      }
+    },
+  
+    initialize: function(options) {
+      _.extend(this.options, options);
+      this._filters = {};
+      this.collection.on("facet", this.handleFacet, this);
+      this.collection.on("resetfilters", this.handleResetFilters, this);
+      this.renderInitial();
+    },
+
+    renderInitial: function() {
+      $("<span>" + this.options.label + "</span>")
+        .addClass('label')
+        .appendTo(this.$el);
+      this.$list = $('<ul>').appendTo(this.$el);
+      this.$noneLabel = $("<span>" + this.options.noneLabel + "</span>")
+        .hide()
+        .appendTo(this.$el);
+      return this.render();
+    },
+
+    render: function() {
+      var empty = _.isEmpty(this._filters);
+      this.$list.empty();
+      _.each(this._filters, function(selected, filter) {
+        if (_.isArray(selected)) {
+          _.each(selected, function(val) {
+            this.addFilterItem(filter, val);
+          }, this);
+        }
+        else {
+          this.addFilterItem(filter, this.options.checkboxLabels[filter]);
+        }
+      }, this);
+      this.$noneLabel.toggle(empty);
+      this.$list.toggle(!empty);
+      return this;
+    },
+
+    addFilterItem: function(filter, label) {
+      $("<li>" + label + "</li>")
+        .addClass(filter)
+        .appendTo(this.$list);
+    },
+
+    /**
+     * Handles the facet collection event.
+     */
+    handleFacet: function(filtered, attrs) {
+      this._filters = attrs;
+      console.debug(this._filters);
+      this.render();
+    },
+
+    handleResetFilters: function() {
+      this._filters = {};
+      this.render();
     }
   });
 
