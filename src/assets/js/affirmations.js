@@ -302,45 +302,47 @@
     },
 
     postInitialize: function() {
-      this.collection.on('filter', this.renderSelect, this);
+      this.collection.on('filter', this.updateOptions, this);
       this.collection.on('resetfilters', this.deselectAll, this);
     },
 
     render: function() {
-      this.$('option').remove();
+      var $select;
       $('<label>').attr('for', this.filterAttribute).html(this.label)
         .appendTo(this.$el);
-      $('<select>').attr('id', this.filterAttribute)
+      $select = $('<select>').attr('id', this.filterAttribute)
         .attr('multiple', 'multiple')
         .addClass('form-control')
         .appendTo(this.$el);
-      this.renderSelect();
+      _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
+        $('<option>').attr('value', opt).html(opt)
+          .appendTo($select);
+      }, this);
+      this._sizeSelect($select, this.$('option').length);
       return this;
     },
 
     /**
-     * Render the HTML select element for this view.
-     *
+     * Update the HTML select element to reflect the currently available
+     * options.
      */
-    renderSelect: function() {
+    updateOptions: function() {
       var $select = this.$('select');
+      var $options = this.$('option');
       // If the select has a value, save it to reselect the selected values
       var selectedVals = $select.val() || [];
-      var numOptions;
+      var facetOptions = this.collection.facetOptions(this.filterAttribute);
 
-      $select.find('option').remove();
-      _.each(this.collection.facetOptions(this.filterAttribute), function(opt) {
-        var $el = $('<option>').attr('value', opt).html(opt)
-          .appendTo($select);
+      $options.prop('selected', false);
+      $options.prop('disabled', true);
+      _.each(facetOptions, function(val) {
+        $options.filter('[value="' + val + '"]').prop('disabled', false);
       }, this);
-
       _.each(selectedVals, function(val) {
-        $select.find('option[value="' + val + '"]').attr('selected', 'selected');
+        $options.filter('option[value="' + val + '"]').prop('selected', true);
       }, this);
 
-      numOptions = $select.find('option').length;
-      this._toggleDisabled($select, numOptions);
-      this._sizeSelect($select, numOptions);
+      this._toggleDisabled($select, facetOptions.length);
 
       return this;
     },
