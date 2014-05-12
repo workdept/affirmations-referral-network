@@ -104,12 +104,20 @@ ul#providers {
   overflow: hidden;
 }
 
+.provider-buttons {
+  clear: both;
+}
+
 #providers.detail .provider {
   display: none !important;
 }
 
 #providers.detail .provider.detail {
   display: block !important;
+}
+
+#providers.detail .btn-more-detail {
+  display: none;
 }
 
 .provider h3 {
