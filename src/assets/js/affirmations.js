@@ -201,7 +201,8 @@
           label: "Offers low-income accomodations",
           type: 'checkbox'
         }
-      ]
+      ],
+      resetButtonLabel: "Clear filters"
     },
 
     attributes: {
@@ -251,13 +252,13 @@
       }
     },
 
-    render: function(options) {
+    render: function() {
       this.$el.append(this.summaryView.render().$el);
       this.$el.append(this.submitButtonView.render().$el);
       $('<button>')
         .attr('type', 'reset')
         .addClass('btn btn-default')
-        .html("Reset filters")
+        .html(this.options.resetButtonLabel)
         .appendTo(this.$el);
       _.each(this._childViews, function(view) {
         this.$el.append(view.render().$el);
