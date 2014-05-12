@@ -70,6 +70,11 @@
   <dt>Languages spoken</dt>
   <dd>{{join languages ", "}}</dd>
   {{/if}}
+ 
+  {{#if nearbybuslines}}
+  <dt>Nearby bus lines</dt>
+  <dd>{{join nearbybuslines ", "}}</dd>
+  {{/if}}
 
   {{#if trainings}}
   <dt>Relevant trainings</dt>
@@ -78,6 +83,11 @@
 
   <dt>Has completed Affirmations' cultural competency training(s) for health providers?</dt>
   <dd>{{#if completedculturalcompetencytraining}}Yes{{else}}No{{/if}}</dd>
+
+  {{#if affirmationstrainings}}
+  <dt>Affirmations trainings</dt>
+  <dd>{{join affirmationstrainings "; "}}</dd>
+  {{/if}}
 
   {{#if comments}}
   <dt>Comments</dt>
