@@ -28,7 +28,7 @@
     "lunr": "^0.4.5",
     "assemble-contrib-permalinks": "^0.3.6",
     "grunt-build-control": "^0.1.2",
-    "github-api": "aendrew/github#147_fix_getSha_write",
+    "github-api": "^0.10.4",
     "grunt-cli": "^0.1.13"
   }
 }
